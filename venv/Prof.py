@@ -1,3 +1,5 @@
+import operations_profs as op
+
 class Prof:
     def __init__(self, prof_id, name="", telephone=''):
         self.prof_id = str(prof_id)
@@ -35,3 +37,4 @@ class Prof:
     def clear_time_preference(self):
         self.time_preferred = []
         self.time_not_possible = []
+

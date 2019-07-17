@@ -42,3 +42,4 @@ def find_prof(name):
     for i in profs:
         if name == i.name:
             return i
+    return None
