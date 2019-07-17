@@ -1,5 +1,6 @@
 import collections
 import pickle
+import operations_gui as og
 
 
 def load_profs():
@@ -35,5 +36,9 @@ def all_profs_info():
         string += '\n'
     return string
 
+
 def find_prof(name):
-    profs=load_profs()
+    profs = load_profs()
+    for i in profs:
+        if name == i.name:
+            return i
