@@ -1,5 +1,6 @@
-
 import tkinter as tk
+
+
 class App(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
@@ -25,10 +26,6 @@ class App(tk.Frame):
         print("hi. contents of entry is now ---->",
               self.contents.get())
 
-root = tk.Tk()
-app = App(master=root)
-app.mainloop()
-
 
 class Prof:
     def __init__(self, prof_id, name="", telephone=''):
@@ -38,10 +35,13 @@ class Prof:
         self.schedule = [[], [], [], [], [], [], []]
         self.time_preferred = []
         self.time_occupied = []
-        self.important_info=[prof_id]
+        self.important_info = [prof_id]
 
 
-p=Prof(1,'sads','asd')
-print(p.important_info)
-p.prof_id=2
-print(p.important_info)
+p = Prof(1, 'sads', 'asd')
+l = [p]
+
+
+def d(l):
+    return l[0]
+

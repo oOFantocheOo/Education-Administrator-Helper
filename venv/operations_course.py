@@ -9,10 +9,9 @@ def save_courses(course_list):
     pickle.dump(course_list, open("courses_file", "wb"))
 
 
-def all_courses_info():
-    courses = load_courses()
+def all_courses_info(courses):
     string = 'ID\tTitle\tProfs\tClasses\tWeek Start\tWeek End\n'
-    for course in courses:
-        string += course.__str__()
+    for cid in courses.keys():
+        string += courses[cid].__str__()
         string += '\n'
     return string
