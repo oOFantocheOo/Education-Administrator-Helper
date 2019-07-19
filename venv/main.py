@@ -8,6 +8,7 @@ profs_info = op.load_profs()
 course_info = oc.load_courses()
 classes_info = ocl.load_classes()
 break_time_info = ob.load_breaktime()
+ob.save_breaktime(break_time_info)
 
 og.show_root_page(profs_info, course_info)
 
