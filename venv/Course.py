@@ -1,7 +1,7 @@
 class Course:
-    def __init__(self, course_id, frequency, title='', class_list='', week_start='', week_end='', taught_by_profs=[],
-                 period_required='', location=''):
-        self.frequency = frequency
+    def __init__(self, course_id, course_type, title='', class_list='', week_start='', week_end='', taught_by_profs=[],
+                 period_required='', location='', scheduled_manually=False):
+        self.course_type = course_type
         self.course_id = course_id
         self.title = title
         self.class_list = class_list
@@ -13,6 +13,7 @@ class Course:
             self.taught_by_profs.append(prof)
         self.period_required = period_required
         self.period_allocated = ''
+        self.scheduled_manually = scheduled_manually
 
     def __str__(self):
         profs_names = ''
