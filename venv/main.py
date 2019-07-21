@@ -10,7 +10,7 @@ classes_info = ocl.load_classes()
 break_time_info = ob.load_breaktime()
 ob.save_breaktime(break_time_info)
 
-og.show_root_page(profs_info, course_info)
+og.show_root_page(profs_info, course_info,classes_info,break_time_info)
 
 op.save_profs(profs_info)
 oc.save_courses(course_info)

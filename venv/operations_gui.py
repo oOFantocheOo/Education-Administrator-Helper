@@ -1,5 +1,7 @@
 import tkinter as tk
 
+import Constants as c
+import operations_breaktime as ob
 import operations_course as oc
 import operations_profs as op
 
@@ -10,7 +12,7 @@ def show_succeed_message():
     tk.Button(temp, text='OK', command=temp.destroy).pack()
 
 
-def show_root_page(profs, courses):
+def show_root_page(profs, courses, class_list, break_time):
     root = tk.Tk()
     root.title("Educational Administration Helper")
     button1 = tk.Button(root, text="Generate Timetable")
@@ -19,9 +21,9 @@ def show_root_page(profs, courses):
     button2.pack()
     button3 = tk.Button(root, text="Course info", command=lambda: show_course_page(courses))
     button3.pack()
-    button4 = tk.Button(root, text="Class info", command=show_class_page)
+    button4 = tk.Button(root, text="Class info", command=lambda: show_class_page(class_list))
     button4.pack()
-    button5 = tk.Button(root, text="Set Break Time", command=show_breaktime_page)
+    button5 = tk.Button(root, text="Set Break Time", command=lambda: show_breaktime_page(break_time))
     button5.pack()
     button6 = tk.Button(root, text="Set Rules", command=show_rule_page)
     button6.pack()
@@ -82,32 +84,47 @@ def show_course_page(courses):
     course_page.mainloop()
 
 
-def show_class_page():
+def show_class_page(classes):
     class_page = tk.Tk()
     class_page.title("Class Information")
     class_page.mainloop()
 
 
 def show_breaktime_page(breaktime):
-    breaktime_page = tk.Tk()
+    breaktime_page = tk.Toplevel()
     breaktime_page.title("Break Time")
-    week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     height = 12
     width = 7
+    button_array = []
+    var_array = []
+
+    def save_break_time():
+        for i in range(height):
+            for j in range(width):
+                breaktime[i][j] = var_array[i][j].get()
+        ob.save_breaktime(breaktime)
+        breaktime_page.destroy()
 
     for j in range(width):
-        b = tk.Label(breaktime_page, text=week[j])
-        b.grid(row=0, column=j+1)
+        b = tk.Label(breaktime_page, text=c.WEEK[j])
+        b.grid(row=0, column=j + 1)
     for i in range(height):
-        b = tk.Label(breaktime_page, text='period'+str(i+1))
-        b.grid(row=i+1, column=0)
-
+        b = tk.Label(breaktime_page, text='period' + str(i + 1))
+        b.grid(row=i + 1, column=0)
 
     for i in range(height):
+        button_array.append([])
+        var_array.append([])
         for j in range(width):
-            b = tk.Checkbutton(breaktime_page, text="")
-            b.grid(row=i + 1, column=j+1)
-    breaktime_page.mainloop()
+            v = tk.Variable()
+            v.set(breaktime[i][j])
+            b = tk.Checkbutton(breaktime_page, variable=v)
+            b.grid(row=i + 1, column=j + 1)
+            button_array[i].append(b)
+            var_array[i].append(v)
+
+    b = tk.Button(breaktime_page, text='Save & Quit', command=save_break_time)
+    b.grid()
 
 
 def show_rule_page():
@@ -117,7 +134,7 @@ def show_rule_page():
 
 
 def show_prof_info(prof):
-    p = tk.Tk()
+    p = tk.Toplevel()
     p.title("Professor Information")
     if not prof:
         tk.Label(p, text='Professor not found').pack()
@@ -131,6 +148,14 @@ def show_prof_info(prof):
         show_succeed_message()
         l['text'] = prof.complete_info()
 
+    def add_preferred_time():
+        apt = tk.Toplevel()
+        apt.title("Add Preferred Time")
+        day_chosen = tk.StringVar()
+        day_chosen.set(c.WEEK[0])
+        tk.Label(apt, text="Day of the week").pack()
+        tk.OptionMenu(apt, day_chosen, *c.WEEK).pack()
+
     tk.Button(p, text="Clear Time Preference", command=clear_TP).pack(side='left')
-    tk.Button(p, text="Add Time Preferred").pack(side='left')
+    tk.Button(p, text="Add Time Preferred", command=add_preferred_time).pack(side='left')
     tk.Button(p, text="Add Time Not Possible").pack(side='left')
