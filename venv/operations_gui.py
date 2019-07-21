@@ -86,13 +86,11 @@ def show_course_page(courses):
     course_page.title("Course Information")
     label = tk.Label(course_page, text=oc.all_courses_info(courses))
     label.pack()
-    course_page.mainloop()
 
 
 def show_class_page(classes):
     class_page = tk.Tk()
     class_page.title("Class Information")
-    class_page.mainloop()
 
 
 def show_breaktime_page(breaktime):
@@ -102,7 +100,6 @@ def show_breaktime_page(breaktime):
 def show_rule_page():
     rule_page = tk.Tk()
     rule_page.title("Rules")
-    rule_page.mainloop()
 
 
 def show_prof_info(prev_page, prof):
