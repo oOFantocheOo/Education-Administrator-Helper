@@ -1,6 +1,7 @@
 import tkinter as tk
 
 import Constants as c
+import Prof
 import operations_gui as og
 
 
@@ -13,10 +14,10 @@ class Timetable:
         for i in range(len(self.timetable)):
             for j in range(len(self.timetable[0])):
                 if self.timetable[i][j] == 1 or self.timetable[i][j] == '1':
-                    res += c.WEEK[j] + ' period ' + str(i)+' '
+                    res += c.WEEK[j] + ' period ' + str(i) + ' '
         return res if res else 'N/A'
 
-    def show(self, page_name):
+    def show(self, page_name, parent=None):
         timetable_page = tk.Toplevel()
         timetable_page.title(page_name)
         var_array = []
@@ -25,7 +26,8 @@ class Timetable:
             for i in range(12):
                 for j in range(7):
                     self.timetable[i][j] = var_array[i][j].get()
-            og.show_succeed_message()
+            if parent and isinstance(parent, Prof.Prof):
+                og.show_prof_info(parent)
             timetable_page.destroy()
 
         for j in range(7):
@@ -46,3 +48,4 @@ class Timetable:
 
         b = tk.Button(timetable_page, text='Save & Quit', command=save)
         b.grid()
+        return timetable_page

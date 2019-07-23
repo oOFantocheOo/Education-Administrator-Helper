@@ -15,3 +15,11 @@ def all_courses_info(courses):
         string += courses[cid].__str__()
         string += '\n'
     return string
+
+
+def selected_courses_info(courses):
+    string = 'ID\tTitle\tProfs\tClasses\tWeek Start\tWeek End\n'
+    for c in courses:
+        string += c.__str__()
+        string += '\n'
+    return string

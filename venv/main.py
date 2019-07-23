@@ -1,4 +1,4 @@
-import Prof as p
+import Course
 import operations_breaktime as ob
 import operations_class as ocl
 import operations_course as oc

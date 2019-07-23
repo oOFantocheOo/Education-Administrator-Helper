@@ -3,7 +3,7 @@ class Class:
         self.major = str(major)
         self.grade = str(grade)
         self.index = str(index)
-        self.schedule = [[], [], [], [], [], [], []]
+        self.schedule = []
         self.classId = str(major) + str(grade) + str(index)
 
     def __str__(self):

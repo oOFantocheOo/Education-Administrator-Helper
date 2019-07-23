@@ -7,7 +7,7 @@ class Prof:
         self.prof_id = str(prof_id)
         self.name = name
         self.telephone = str(telephone)
-        self.schedule = ''
+        self.schedule = []
         self.time_preferred = tt.Timetable()
         self.time_not_possible = tt.Timetable()
 
