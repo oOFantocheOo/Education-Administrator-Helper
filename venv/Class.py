@@ -8,3 +8,4 @@ class Class:
 
     def __str__(self):
         return self.major + self.grade + self.index
+4

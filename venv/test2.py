@@ -1,21 +1,9 @@
-import tkinter as tk
+import tkinter
 
-master = tk.Tk()
+root = tkinter.Tk()
+root.title("root")
 
-var = tk.StringVar(master)
-var.set("one") # initial value
-
-option = tk.OptionMenu(master, var, "one", "two", "three", "four")
-option.pack()
-
-#
-# test stuff
-
-def ok():
-    print ("value is", var.get())
-    master.quit()
-
-button = tk.Button(master, text="OK", command=ok)
-button.pack()
-
-master.mainloop()
+top = tkinter.Toplevel(root)
+top.title("top")
+top.lift(root)
+root.mainloop()

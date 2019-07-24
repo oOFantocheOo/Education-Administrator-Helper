@@ -7,17 +7,58 @@ import operations_profs as op
 
 def show_succeed_message():
     temp = tk.Toplevel()
+    temp.lift()
     tk.Label(temp, text='Succeeded!').pack()
-    tk.Button(temp, text='OK', command=temp.destroy).pack()
+    tk.Button(temp, text='OK', command=temp.destroy, default='active').pack()
+
+    return temp
+
+
+def show_waiting_message():
+    temp = tk.Toplevel()
+    tk.Label(temp, text='Please wait...').pack()
+    return temp
 
 
 def show_root_page(profs, courses, class_list, break_time):
+    school_timetable = [None]  # wrapped as list for modification
     root = tk.Tk()
+
+    def show_school_timetable_widget(parent):
+        st_widget = tk.Toplevel(parent)
+        st_widget.geometry('300x200')
+        st_widget.focus_force()
+
+        def create_empty_school_timetable(week_num, title):
+            school_timetable[0] = st.SchoolTimetable(week_num, title)
+            label['text'] = 'School timetable initialized'
+            st_widget.destroy()
+
+        st_widget.title('Create School Timetable')
+        tk.Label(st_widget, text='Title of school timetable:').pack()
+        e1 = tk.Entry(st_widget)
+        e1.insert(tk.END, 'qwe')
+        e1.pack()
+        tk.Label(st_widget, text='Number of weeks:').pack()
+        e2 = tk.Entry(st_widget)
+        e2.insert(tk.END, 3)
+        e2.pack()
+        tk.Button(st_widget, text='OK', command=lambda: create_empty_school_timetable(e2.get(), e1.get())).pack()
+        tk.Button(st_widget, text='Cancel', command=st_widget.destroy).pack()
+        st_widget.lift(parent)
+
+    def check_and_build_school_timatable():
+        if not school_timetable[0]:
+            return
+        else:
+            school_timetable[0].generate_school_timetable(profs, courses, class_list, break_time)
+
     root.geometry('600x400')
     root.title("Educational Administration Helper")
-    button1 = tk.Button(root, text="Generate Timetable",
-                        command=lambda: st.generate_school_timetable(profs, courses, class_list, break_time))
+    button1 = tk.Button(root, text="Set Timetable", command=lambda: show_school_timetable_widget(root))
     button1.pack()
+    label = tk.Label(root, text='School timetable not initialized yet!')
+    label.pack()
     button2 = tk.Button(root, text="Prof info", command=lambda: show_prof_page(profs))
     button2.pack()
     button3 = tk.Button(root, text="Course info", command=lambda: show_course_page(courses))
@@ -30,6 +71,9 @@ def show_root_page(profs, courses, class_list, break_time):
     button6.pack()
     button7 = tk.Button(root, text='Check Conflicts', command=show_checking_page)
     button7.pack()
+    button8 = tk.Button(root, text='Generate Timetable', command=check_and_build_school_timatable)
+    button8.pack()
+
     root.mainloop()
 
 

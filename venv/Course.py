@@ -2,8 +2,7 @@ import Timetable as tt
 
 
 class Course:
-    def __init__(self, course_id, course_type, title='', class_list='', week_start='',
-                 week_end='', taught_by_profs=[],
+    def __init__(self, course_id, course_type, week_start='', week_end='', title='', class_list=[], taught_by_profs=[],
                  period_required=tt.Timetable, location='', scheduled_manually=False, should_be_scheduled=True):
         self.course_type = course_type
         self.course_id = course_id
@@ -16,7 +15,7 @@ class Course:
         for prof in taught_by_profs:
             self.taught_by_profs.append(prof)
         self.period_required = period_required
-        self.period_allocated = ''
+        self.period_allocated = []
         self.scheduled_manually = scheduled_manually
         self.should_be_scheduled = should_be_scheduled
 

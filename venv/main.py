@@ -4,6 +4,7 @@ import operations_class as ocl
 import operations_course as oc
 import operations_gui as og
 import operations_profs as op
+import Class
 
 profs_info = op.load_profs()
 course_info = oc.load_courses()

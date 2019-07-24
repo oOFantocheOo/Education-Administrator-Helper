@@ -1,19 +1,38 @@
 import tkinter as tk
 
-course_page = tk.Tk()
-course_page.title("Course Information")
-v1 = tk.Variable()
-v1.set(1)
-v2 = tk.Variable()
-v2.set(1)
-v3 = tk.Variable()
-v3.set(1)
-v4 = tk.Variable()
-v4.set(0)
 
-b1 = tk.Checkbutton(course_page, variable=v1, text='Scheduled manually').pack()
-b2 = tk.Checkbutton(course_page, variable=v2, text='Scheduled automatically').pack()
-b3 = tk.Checkbutton(course_page, variable=v3, text='Should be scheduled').pack()
-b4 = tk.Checkbutton(course_page, variable=v4, text='Should not be scheduled').pack()
+def show_school_timetable_widget(parent):
+    st_widget = tk.Toplevel(parent)
+    st_widget.geometry('300x200')
 
-course_page.mainloop()
+    def create_empty_school_timetable(week_num, title):
+        st_widget.destroy()
+
+    st_widget.title('Create School Timetable')
+    tk.Label(st_widget, text='Title of school timetable:').pack()
+    e1 = tk.Entry(st_widget)
+    e1.insert(tk.END, 'qwe')
+    e1.pack()
+    tk.Label(st_widget, text='Number of weeks:').pack()
+    e2 = tk.Entry(st_widget)
+    e2.insert(tk.END, 3)
+    e2.pack()
+    tk.Button(st_widget, text='OK', command=lambda: create_empty_school_timetable(e2.get(), e1.get())).pack()
+    tk.Button(st_widget, text='Cancel', command=st_widget.destroy).pack()
+    st_widget.lift(parent)
+    print('lifted')
+
+
+def show_root_page():
+    root = tk.Tk()
+    root.geometry('600x400')
+    root.title("Educational Administration Helper")
+    button1 = tk.Button(root, text="Set Timetable", command=lambda: show_school_timetable_widget(root))
+    button1.pack()
+    label = tk.Label(root, text='School timetable not initialized yet!')
+    label.pack()
+
+    root.mainloop()
+
+
+show_root_page()
