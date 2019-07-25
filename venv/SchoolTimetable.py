@@ -74,9 +74,6 @@ class SchoolTimetable:
                 for p in c.taught_by_profs:
                     Prof.Prof(p).schedule[i]
 
-
-
-
         print(profs['1'].schedule[0])
         wait.destroy()
         og.show_succeed_message()

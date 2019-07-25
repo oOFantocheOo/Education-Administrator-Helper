@@ -3,6 +3,7 @@ import tkinter as tk
 import Constants as c
 import Prof
 import operations_gui as og
+import Course
 
 
 class Timetable:
@@ -28,6 +29,8 @@ class Timetable:
                     self.timetable[i][j] = var_array[i][j].get()
             if parent and isinstance(parent, Prof.Prof):
                 og.show_prof_info(parent)
+            if parent and isinstance(parent, Course.Course):
+                og.show_course_info(parent)
             timetable_page.destroy()
 
         for j in range(7):
