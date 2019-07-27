@@ -12,14 +12,13 @@ class Prof:
         self.time_not_possible = tt.Timetable()
 
     def __str__(self):
-        telephone = self.telephone if self.telephone else 'N/A'
-        return str(self.prof_id) + '\t' + str(self.name) + '\t' + str(telephone)
+        return str(self.prof_id) + '\t' + str(self.name)
 
     def complete_info(self):
-        time = self.schedule if self.schedule else 'No Courses Allocated'
         tp = self.time_preferred.__str__()
         tnp = self.time_not_possible.__str__()
-        return self.__str__() + '\t' + str(time) + '\t' + str(tp) + '\t' + str(tnp)
+        tele = self.telephone if self.telephone else 'N/A'
+        return self.__str__() + '\t' + str(tele) + '\t' + str(tp) + '\t' + str(tnp)
 
     def change_telephone(self, telephone):
         self.telephone = str(telephone)

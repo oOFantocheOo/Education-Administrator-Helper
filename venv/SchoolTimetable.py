@@ -72,7 +72,7 @@ class SchoolTimetable:
         for c in courses_manually:
             for i in range(c.week_start - 1, c.week_end):
                 for p in c.taught_by_profs:
-                    Prof.Prof(p).schedule[i]
+                    p.schedule[i]
 
         print(profs['1'].schedule[0])
         wait.destroy()

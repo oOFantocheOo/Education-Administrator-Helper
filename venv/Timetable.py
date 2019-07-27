@@ -1,16 +1,24 @@
 import tkinter as tk
 
 import Constants as c
+import Course
 import Prof
 import operations_gui as og
-import Course
 
 
 class Timetable:
     def __init__(self):
         self.timetable = [[0 for x in range(7)] for y in range(12)]
 
+    def all_zeros(self):
+        def all_zeros_1d(L):
+            return all(x == 0 or x == '0' for x in L)
+        return all(all_zeros_1d(a) for a in self.timetable)
+
     def __str__(self):  # to be modified
+        if self.all_zeros():
+            return 'N/A'
+
         res = ''
         for i in range(len(self.timetable)):
             for j in range(len(self.timetable[0])):
@@ -29,8 +37,6 @@ class Timetable:
                     self.timetable[i][j] = var_array[i][j].get()
             if parent and isinstance(parent, Prof.Prof):
                 og.show_prof_info(parent)
-            if parent and isinstance(parent, Course.Course):
-                og.show_course_info(parent)
             timetable_page.destroy()
 
         for j in range(7):
