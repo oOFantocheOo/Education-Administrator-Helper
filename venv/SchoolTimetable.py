@@ -37,7 +37,6 @@ class SchoolTimetable:
                 # (course_id, [prof_id]): be taught Course with course_id by Prof(s) with prof_id(s) in this period
 
         # Step 2: negate all break time in schedule, so that it can't be used
-
         for pid in profs.keys():  # set break time in profs' info
             cur = profs[pid].schedule
             for w in range(self.week_num):

@@ -7,6 +7,7 @@ import operations_profs as op
 
 def show_succeed_message():
     temp = tk.Toplevel()
+    temp.grab_set()
     tk.Label(temp, text='Succeeded!').pack()
     tk.Button(temp, text='OK', command=temp.destroy, default='active').pack()
     temp.focus_force()
@@ -15,12 +16,14 @@ def show_succeed_message():
 
 def show_waiting_message():
     temp = tk.Toplevel()
+    temp.grab_set()
     tk.Label(temp, text='Please wait...').pack()
     return temp
 
 
 def show_error_message(error):
     temp = tk.Toplevel()
+    temp.grab_set()
     tk.Label(temp, text='Error! ' + error).pack()
     tk.Button(temp, text='OK', command=temp.destroy, default='active').pack()
     temp.focus_force()
@@ -30,11 +33,13 @@ def show_error_message(error):
 def show_root_page(profs, courses, class_list, break_time):
     school_timetable = [None]  # wrapped as list for modification
     root = tk.Tk()
+    root.focus_force()
 
     def show_school_timetable_widget(parent):
         st_widget = tk.Toplevel(parent)
         st_widget.geometry('300x200')
         st_widget.focus_force()
+        st_widget.grab_set()
 
         def create_empty_school_timetable(week_num, title):
             school_timetable[0] = st.SchoolTimetable(week_num, title)
@@ -93,6 +98,8 @@ def show_checking_page():
 def show_prof_page(profs):
     def find_prof_widget():
         fp = tk.Toplevel()
+        fp.grab_set()
+        fp.focus_force()
         fp.title("Find A Professor")
         tk.Label(fp, text="Enter the professor's name").pack()
         e = tk.Entry(fp)
@@ -102,12 +109,16 @@ def show_prof_page(profs):
 
     def add_prof_widget():
         ap = tk.Toplevel()
+        ap.focus_force()
+        ap.grab_set()
         ap.title("Add A Professor")
         tk.Label(ap, text="Not implemented").pack()
         tk.Button(ap, text='Cancel', command=ap.destroy).pack()
 
     def delete_prof_widget():
         dp = tk.Toplevel()
+        dp.focus_force()
+        dp.grab_set()
         dp.title("Delete A Professor")
         tk.Label(dp, text="Not implemented").pack()
         tk.Button(dp, text='Cancel', command=dp.destroy).pack()
@@ -118,6 +129,7 @@ def show_prof_page(profs):
         show_succeed_message()
 
     prof_page = tk.Toplevel()
+    prof_page.grab_set()
     prof_page.title("Prof Information")
 
     i = 0
@@ -139,6 +151,7 @@ def show_prof_page(profs):
 def show_course_page(courses, classes, profs):
     def find_course_by_title_widget():
         fc = tk.Toplevel()
+        fc.grab_set()
         fc.focus_force()
         fc.title("Find A Course")
         tk.Label(fc, text="Enter the course's title").pack()
@@ -153,6 +166,7 @@ def show_course_page(courses, classes, profs):
     def find_course_by_id_widget():
         fc = tk.Toplevel()
         fc.focus_force()
+        fc.grab_set()
         fc.title("Find A Course")
         tk.Label(fc, text="Enter the course ID").pack()
         e = tk.Entry(fc)
@@ -210,6 +224,8 @@ def show_course_page(courses, classes, profs):
 def show_class_page(classes):
     class_page = tk.Toplevel()
     class_page.title("Class Information")
+    class_page.grab_set()
+    class_page.focus_force()
 
 
 def show_breaktime_page(breaktime):
@@ -219,6 +235,8 @@ def show_breaktime_page(breaktime):
 def show_rule_page():
     rule_page = tk.Toplevel()
     rule_page.title("Rules")
+    rule_page.grab_set()
+    rule_page.focus_force()
 
 
 def show_prof_info(prof, prev_page=None):
@@ -243,6 +261,8 @@ def show_prof_info(prof, prev_page=None):
         p.destroy()
 
     p = tk.Toplevel()
+    p.grab_set()
+    p.focus_force()
     p.title("Professor Information")
     if not prof:
         tk.Label(p, text='Professor not found').pack()
@@ -302,6 +322,8 @@ def show_course_info(course, classes, profs, prev_page=None):
         column2[7]['text'] = str(status)
 
     c = tk.Toplevel()
+    c.grab_set()
+    c.focus_force()
     c.title("Course Information")
     if not course:
         tk.Label(c, text='Course not found').pack()

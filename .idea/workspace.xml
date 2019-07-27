@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ab634377-4e7c-490d-9c2e-94d9370fd5b8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Prof.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Prof.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/SchoolTimetable.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/SchoolTimetable.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Timetable.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Timetable.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/courses_file" beforeDir="false" afterPath="$PROJECT_DIR$/venv/courses_file" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/operations_gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/operations_gui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/profs_file" beforeDir="false" afterPath="$PROJECT_DIR$/venv/profs_file" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,25 +41,15 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/venv/operations_gui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="197" column="54" selection-start-line="197" selection-start-column="54" selection-end-line="197" selection-end-column="54" />
+            <state relative-caret-position="-170">
+              <caret line="41" column="28" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="28" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
-                <element signature="e#146#322#0" />
-                <element signature="e#357#442#0" />
-                <element signature="e#482#664#0" />
-                <element signature="e#509#2827#0" />
                 <element signature="e#2860#2864#0" />
-                <element signature="e#2898#4496#0" />
-                <element signature="e#6070#6138#0" />
-                <element signature="e#6181#6208#0" />
-                <element signature="e#6237#6291#0" />
-                <element signature="e#8106#9720#0" />
                 <element signature="e#8134#8376#0" />
                 <element signature="e#8828#8910#0" />
                 <element signature="e#8953#9036#0" />
                 <element signature="e#9080#9167#0" />
-                <element signature="e#9754#14907#0" />
                 <element signature="e#9797#10759#0" />
                 <element signature="e#10744#10860#0" />
                 <element signature="e#11428#11505#0" />
@@ -505,7 +490,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564067578276</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="improve GUI">
+      <created>1564200438358</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1564200438358</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView">
@@ -543,7 +535,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="commmit" />
     <MESSAGE value="Update some Course features" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update some Course features" />
+    <MESSAGE value="improve GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="improve GUI" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../deepnude_official-master/main.py" />
@@ -658,25 +651,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/venv/operations_gui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="197" column="54" selection-start-line="197" selection-start-column="54" selection-end-line="197" selection-end-column="54" />
+        <state relative-caret-position="-170">
+          <caret line="41" column="28" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="28" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
-            <element signature="e#146#322#0" />
-            <element signature="e#357#442#0" />
-            <element signature="e#482#664#0" />
-            <element signature="e#509#2827#0" />
             <element signature="e#2860#2864#0" />
-            <element signature="e#2898#4496#0" />
-            <element signature="e#6070#6138#0" />
-            <element signature="e#6181#6208#0" />
-            <element signature="e#6237#6291#0" />
-            <element signature="e#8106#9720#0" />
             <element signature="e#8134#8376#0" />
             <element signature="e#8828#8910#0" />
             <element signature="e#8953#9036#0" />
             <element signature="e#9080#9167#0" />
-            <element signature="e#9754#14907#0" />
             <element signature="e#9797#10759#0" />
             <element signature="e#10744#10860#0" />
             <element signature="e#11428#11505#0" />

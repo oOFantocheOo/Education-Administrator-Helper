@@ -28,6 +28,8 @@ class Timetable:
 
     def show(self, page_name='.', parent=None):
         timetable_page = tk.Toplevel()
+        timetable_page.focus_force()
+        timetable_page.grab_set()
         timetable_page.title(page_name)
         var_array = []
 
