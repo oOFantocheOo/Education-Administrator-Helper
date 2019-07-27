@@ -1,8 +1,10 @@
 import tkinter as tk
 
+import Constants as c
 import SchoolTimetable as st
 import operations_course as oc
 import operations_profs as op
+import operations_settings as ost
 
 
 def show_succeed_message():
@@ -30,7 +32,7 @@ def show_error_message(error):
     return temp
 
 
-def show_root_page(profs, courses, class_list, break_time):
+def show_root_page(profs, courses, class_list, break_time, settings):
     school_timetable = [None]  # wrapped as list for modification
     root = tk.Tk()
     root.focus_force()
@@ -65,7 +67,7 @@ def show_root_page(profs, courses, class_list, break_time):
         if not school_timetable[0]:
             return
         else:
-            school_timetable[0].generate_school_timetable(profs, courses, class_list, break_time)
+            school_timetable[0].generate_school_timetable(profs, courses, class_list, break_time, settings)
 
     root.geometry('600x400')
     root.title("Educational Administration Helper")
@@ -75,13 +77,13 @@ def show_root_page(profs, courses, class_list, break_time):
     label.pack()
     button2 = tk.Button(root, text="Prof info", command=lambda: show_prof_page(profs))
     button2.pack()
-    button3 = tk.Button(root, text="Course info", command=lambda: show_course_page(courses, class_list, profs))
+    button3 = tk.Button(root, text="Course info", command=lambda: show_course_page(courses))
     button3.pack()
     button4 = tk.Button(root, text="Class info", command=lambda: show_class_page(class_list))
     button4.pack()
     button5 = tk.Button(root, text="Set Break Time", command=lambda: show_breaktime_page(break_time))
     button5.pack()
-    button6 = tk.Button(root, text="Set Rules", command=show_rule_page)
+    button6 = tk.Button(root, text="Settings", command=lambda: show_settings_page(settings))
     button6.pack()
     button7 = tk.Button(root, text='Check Conflicts', command=show_checking_page)
     button7.pack()
@@ -148,7 +150,7 @@ def show_prof_page(profs):
     button4.grid(s='s')
 
 
-def show_course_page(courses, classes, profs):
+def show_course_page(courses, values=[]):
     def find_course_by_title_widget():
         fc = tk.Toplevel()
         fc.grab_set()
@@ -159,7 +161,7 @@ def show_course_page(courses, classes, profs):
         e.insert(tk.END, 'intro to comp sci')
         e.pack()
         tk.Button(fc, text='OK',
-                  command=lambda: show_course_info(oc.find_course_by_title(courses, e.get()), classes, profs, fc)).pack(
+                  command=lambda: show_course_info(oc.find_course_by_title(courses, e.get()), fc)).pack(
             side='left')
         tk.Button(fc, text='Cancel', command=fc.destroy).pack()
 
@@ -173,9 +175,7 @@ def show_course_page(courses, classes, profs):
         e.insert(tk.END, '1')
         e.pack()
         tk.Button(fc, text='OK',
-                  command=lambda: show_course_info(oc.find_course_by_course_id(courses, e.get()), classes, profs,
-                                                   fc)).pack(
-            side='left')
+                  command=lambda: show_course_info(oc.find_course_by_course_id(courses, e.get()), fc)).pack(side='left')
         tk.Button(fc, text='Cancel', command=fc.destroy).pack()
 
     course_page = tk.Toplevel()
@@ -189,8 +189,19 @@ def show_course_page(courses, classes, profs):
     v2.set(1)
     v3.set(1)
     v4.set(1)
+
+    if values:
+        v1.set(values[0])
+        v2.set(values[1])
+        v3.set(values[2])
+        v4.set(values[3])
+
     courses_to_be_shown = []
-    label = tk.Label(course_page, text=oc.all_courses_info(courses))
+
+    row5 = [tk.Label(course_page) for _ in range(7)]
+    for i in range(len(row5)):
+        row5[i]['text'] = c.COURSE_GENERAL_INFO[i]
+        row5[i].grid(row=5, column=i)
 
     def update_courses_shown():
         courses_to_be_shown.clear()
@@ -203,22 +214,28 @@ def show_course_page(courses, classes, profs):
                 courses_to_be_shown.append(courses[ck])
             elif not courses[ck].should_be_scheduled and int(v4.get()) == 1:
                 courses_to_be_shown.append(courses[ck])
-            label['text'] = oc.selected_courses_info(courses_to_be_shown)
+            n = len(courses_to_be_shown)
+            for i in range(n):
+                oc.display_course(course_page, courses_to_be_shown[i], i)
 
-    tk.Label(course_page,text='Filters:').grid(row=0, column=0)
-    tk.Checkbutton(course_page, variable=v1, text='Scheduled manually', command=update_courses_shown).grid(row=1,
-                                                                                                           column=0)
-    tk.Checkbutton(course_page, variable=v2, text='Scheduled automatically', command=update_courses_shown).grid(row=2,
-                                                                                                                 column=0)
-    tk.Checkbutton(course_page, variable=v3, text='Should be scheduled', command=update_courses_shown).grid(row=3,
-                                                                                                            column=0)
-    tk.Checkbutton(course_page, variable=v4, text='Should not be scheduled', command=update_courses_shown).grid(row=4,
-                                                                                                                column=0)
-    label.grid(row=5, column=0)
+    update_courses_shown()
+
+    tk.Label(course_page, text='Filters:').grid(row=0, column=0)
+
+    def refresh_with_values():
+        new_values = [v1.get(), v2.get(), v3.get(), v4.get()]
+        course_page.destroy()
+        show_course_page(courses, new_values)
+
+    tk.Button(course_page, text='Apply', command=refresh_with_values).grid(row=1, column=2)
+    tk.Checkbutton(course_page, variable=v1, text='Scheduled manually').grid(row=1, column=1)
+    tk.Checkbutton(course_page, variable=v2, text='Scheduled automatically').grid(row=2, column=1)
+    tk.Checkbutton(course_page, variable=v3, text='Should be scheduled').grid(row=3, column=1)
+    tk.Checkbutton(course_page, variable=v4, text='Should not be scheduled').grid(row=4, column=1)
     button1 = tk.Button(course_page, text="Find Course by Title", command=find_course_by_title_widget)
-    button1.grid(row=6, column=0)
+    button1.grid(row=1, column=4)
     button2 = tk.Button(course_page, text="Find Course by Course ID", command=find_course_by_id_widget)
-    button2.grid(row=6, column=1)
+    button2.grid(row=2, column=4)
 
 
 def show_class_page(classes):
@@ -232,11 +249,33 @@ def show_breaktime_page(breaktime):
     breaktime.show('Breaktime')
 
 
-def show_rule_page():
-    rule_page = tk.Toplevel()
-    rule_page.title("Rules")
-    rule_page.grab_set()
-    rule_page.focus_force()
+def show_settings_page(settings):
+    def save_and_quit():
+        settings.language = variable_language.get()
+        settings.arranging_rule = variable_rule.get()
+        ost.save_settings(settings)
+        settings_page.destroy()
+
+    settings_page = tk.Toplevel()
+    settings_page.title("Settings")
+    settings_page.grab_set()
+    settings_page.focus_force()
+
+    variable_language = tk.IntVar()
+    variable_rule = tk.IntVar()
+    variable_language.set(settings.language)
+    variable_rule.set(settings.arranging_rule)
+
+    tk.Label(settings_page, text='Language:').pack(anchor='w')
+    tk.Radiobutton(settings_page, text="English", variable=variable_language, value=0).pack(anchor='w')
+    tk.Radiobutton(settings_page, text="中文", variable=variable_language, value=1).pack(anchor='w')
+
+    tk.Label(settings_page, text='Arranging Rule:').pack(anchor='w')
+    tk.Radiobutton(settings_page, text="Vacancy priority", variable=variable_rule, value=0).pack(anchor='w')
+    tk.Radiobutton(settings_page, text="Compactness priority", variable=variable_rule, value=1).pack(anchor='w')
+
+    button_save = tk.Button(settings_page, text='Save & Quit', command=save_and_quit)
+    button_save.pack()
 
 
 def show_prof_info(prof, prev_page=None):
@@ -292,7 +331,7 @@ def show_prof_info(prof, prev_page=None):
     tk.Button(p, text="Add Time Not Possible", command=change_impossible_time).grid(s='s')
 
 
-def show_course_info(course, classes, profs, prev_page=None):
+def show_course_info(course, prev_page=None):
     def update_label():
 
         profs_names = ''
@@ -321,6 +360,8 @@ def show_course_info(course, classes, profs, prev_page=None):
         column2[6]['text'] = str(classes)
         column2[7]['text'] = str(status)
 
+    classes = oc.load_courses()
+    profs = op.load_profs()
     c = tk.Toplevel()
     c.grab_set()
     c.focus_force()
@@ -353,22 +394,18 @@ def show_course_info(course, classes, profs, prev_page=None):
 
     def set_scheduled_manually():
         course.set_scheduled_manually()
-        show_succeed_message()
         update_label()
 
     def set_not_scheduled_manually():
         course.set_not_scheduled_manually()
-        show_succeed_message()
         update_label()
 
     def set_should_be_scheduled():
         course.set_should_be_scheduled()
-        show_succeed_message()
         update_label()
 
     def set_should_not_be_scheduled():
         course.set_should_not_be_scheduled()
-        show_succeed_message()
         update_label()
 
     def set_required_period():
@@ -383,6 +420,8 @@ def show_course_info(course, classes, profs, prev_page=None):
         update_label()
         rc = tk.Toplevel()
         rc.title('Rebind Classes')
+        rc.grab_set()
+        rc.focus_force()
         label1 = tk.Label(rc, text='Major').pack()
         entry1 = tk.Entry(rc)
         entry1.pack()
@@ -412,8 +451,6 @@ def show_course_info(course, classes, profs, prev_page=None):
         update_label()
 
         def find_prof_by_name():
-            print(entry1.get())
-            print(profs)
             p = op.find_prof(profs, entry1.get())
             if not p:
                 show_error_message('Prof not found!')
@@ -432,15 +469,17 @@ def show_course_info(course, classes, profs, prev_page=None):
 
         rp = tk.Toplevel()
         rp.title('Rebind Profs')
+        rp.grab_set()
+        rp.focus_force()
         label1 = tk.Label(rp, text='Name').pack()
         entry1 = tk.Entry(rp)
         entry1.pack()
-        button1 = tk.Button(rp, text='Search By Name', command=find_prof_by_name).pack()
+        button1 = tk.Button(rp, text='Add By Name', command=find_prof_by_name).pack()
 
         label2 = tk.Label(rp, text='Prof ID').pack()
         entry2 = tk.Entry(rp)
         entry2.pack()
-        button2 = tk.Button(rp, text='Search By ID', command=find_prof_by_id).pack()
+        button2 = tk.Button(rp, text='Add By ID', command=find_prof_by_id).pack()
 
     tk.Button(c, text="Schedule Manually", command=set_scheduled_manually).grid(s='s')
     tk.Button(c, text="Schedule For Me", command=set_not_scheduled_manually).grid(s='s')
