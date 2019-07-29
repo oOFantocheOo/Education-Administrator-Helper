@@ -1,4 +1,4 @@
-import  pickle
+import pickle
 
 class Settings:
     def __init__(self):

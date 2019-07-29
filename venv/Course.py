@@ -2,7 +2,7 @@ import Timetable as tt
 
 
 class Course:
-    def __init__(self, course_id, course_type, week_start='', week_end='', title='', class_list=[], taught_by_profs=[],
+    def __init__(self, course_id, title, course_type='', major=' ', week_start='', week_end='', class_list=[], taught_by_profs=[],
                  period_required=tt.Timetable(), location='', scheduled_manually=False, should_be_scheduled=True):
         self.course_type = course_type
         self.course_id = str(course_id)
@@ -18,6 +18,7 @@ class Course:
         self.period_allocated = []
         self.scheduled_manually = scheduled_manually
         self.should_be_scheduled = should_be_scheduled
+        self.major = major
 
     def __str__(self):
         profs_names = ''
@@ -34,7 +35,7 @@ class Course:
         for prof in self.taught_by_profs:
             profs_names = profs_names + prof.name
         return str(self.course_id) + '\n' + str(self.title) + '\n' + str(profs_names) + '\n' + str(
-            *self.class_list) + '\n' + str(self.week_start) + '\n' + str(self.week_end) +'\n'+ status
+            *self.class_list) + '\n' + str(self.week_start) + '\n' + str(self.week_end) + '\n' + status
 
     def complete_info(self):
         time = self.period_allocated if self.period_allocated else 'Not Allocated Yet!'
@@ -63,10 +64,10 @@ class Course:
         self.class_list = []
 
     def add_class(self, class_a):
-        self.class_list.append(class_a)
+        self.class_list.append(class_a.classId)
 
     def clear_profs(self):
         self.taught_by_profs = []
 
     def add_prof(self, prof):
-        self.taught_by_profs.append(prof)
+        self.taught_by_profs.append(prof.prof_id)

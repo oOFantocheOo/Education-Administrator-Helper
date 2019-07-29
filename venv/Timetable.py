@@ -1,18 +1,18 @@
 import tkinter as tk
 
 import Constants as c
-import Course
 import Prof
 import operations_gui as og
 
 
 class Timetable:
     def __init__(self):
-        self.timetable = [[0 for x in range(7)] for y in range(12)]
+        self.timetable = [['0' for x in range(7)] for y in range(12)]
 
     def all_zeros(self):
         def all_zeros_1d(L):
             return all(x == 0 or x == '0' for x in L)
+
         return all(all_zeros_1d(a) for a in self.timetable)
 
     def __str__(self):  # to be modified
@@ -89,3 +89,19 @@ class Timetable:
                             str(Timetable_2) + '[' + str(r) + ']' + '[' + str(c) + ']' + ' should not be ' + str(
                                 self.timetable[r][c]) + ', but it can be one of ' + str(possible_values_2))
         return errors
+
+    # Check if every time when Timetable_2[i][j] == value_2, self[i][j] == value_1
+    def check(self, Timetable_2, value_1, value_2):
+        for r in range(len(self.timetable)):
+            for c in range(len(self.timetable[0])):
+                if str(Timetable_2.timetable[r][c]) == str(value_2):
+                    if str(self.timetable[r][c]) != value_1:
+                        print (self)
+        return ()
+
+    # Set self[i][j] == value_1 every time when Timetable_2[i][j] == value_2
+    def change(self, Timetable_2, value_1, value_2):
+        for r in range(len(self.timetable)):
+            for c in range(len(self.timetable[0])):
+                if str(Timetable_2.timetable[r][c]) == str(value_2):
+                    self.timetable[r][c] = value_1

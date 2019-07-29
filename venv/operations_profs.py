@@ -1,5 +1,8 @@
 import pickle
 
+import Prof
+import openpyxl as xl
+
 
 def load_profs():
     return pickle.load(open("profs_file", "rb"))
@@ -22,3 +25,17 @@ def find_prof(profs, name):
         if name == profs[pid].name:
             return profs[pid]
     return None
+
+
+# Extract info from the first worksheet in profs.xlsx
+# column1: name; column2: ID
+def update_profs(profs):
+    workbook = xl.load_workbook('profs.xlsx')
+    worksheet = workbook[workbook.sheetnames[0]]
+
+    i = 1
+    while worksheet['A' + str(i)].value:
+        name = str(worksheet['A' + str(i)].value)
+        id = str(worksheet['B' + str(i)].value)
+        profs[id] = Prof.Prof(id, name)
+        i += 1

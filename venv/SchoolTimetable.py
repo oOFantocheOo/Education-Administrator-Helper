@@ -1,5 +1,5 @@
-import Prof
 import Timetable as tt
+import time
 import operations_gui as og
 
 
@@ -12,7 +12,7 @@ class SchoolTimetable:
     def __str__(self):
         return "Not implemented"
 
-    def generate_school_timetable(self, profs, courses, class_list, break_time):
+    def generate_school_timetable(self, profs, courses, class_list, break_time, settings):
 
         # Step 1: initialization & checking
         wait = og.show_waiting_message()
@@ -53,8 +53,7 @@ class SchoolTimetable:
         for pid in profs.keys():
             tnp = profs[pid].time_not_possible
             for w in range(self.week_num):
-                err = profs[pid].schedule[w].update_based_on(tnp, ['0', 'break time'], ['0', '1'], '1',
-                                                             'time not possible')
+                err = profs[pid].schedule[w].update_based_on(tnp, ['0', 'break time'], ['0', '1'], '1', 'time not possible')
                 if err: print(err)
 
         # Step 4: take all Courses that should be scheduled
@@ -68,11 +67,28 @@ class SchoolTimetable:
                 courses_manually.append(courses[cid])
 
         # Step 5: pre-distribute courses that are set manually
+        err = []
         for c in courses_manually:
             for i in range(c.week_start - 1, c.week_end):
                 for p in c.taught_by_profs:
-                    p.schedule[i]
+                    err.append(profs[p].schedule[i].check(c.period_required, '0', '1'))  # Check if there's conflict
+                for class_a in c.class_list:
+                    err.append(class_list[class_a].schedule[i].check(c.period_required, '0', '1'))  # Check if there's conflict
+        for e in err:
+            if e:
+                print(e)
+        for c in courses_manually:
+            for i in range(c.week_start - 1, c.week_end):
+                for p in c.taught_by_profs:
+                    profs[p].schedule[i].change(c.period_required, (c.course_id, c.class_list), '1')
+                for class_a in c.class_list:
+                    class_list[class_a].schedule[i].change(c.period_required, (c.course_id, c.taught_by_profs), '1')
 
-        print(profs['1'].schedule[0])
+        # Step 5: allocate courses
+        # i)
+
+
+
+
         wait.destroy()
         og.show_succeed_message()

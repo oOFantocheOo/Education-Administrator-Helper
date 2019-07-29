@@ -1,7 +1,10 @@
 import pickle
 import tkinter as tk
 
+import Course
+import openpyxl as xl
 import operations_gui as og
+import operations_profs as op
 
 
 def load_courses():
@@ -42,16 +45,17 @@ def selected_courses_info(courses):
     return string
 
 
-def display_course(page, course, n):  # In which page, display which course, and this is the nth course to display
+def display_course(page, course, n, profs):  # In which page, display which course, and this is the nth course to display
     profs_names = ''
     classes = ''
     for prof in course.taught_by_profs:
-        profs_names += ' ' + prof.name
+        profs_names += ' ' + profs[prof].name
     for class_a in course.class_list:
-        classes += ' ' + class_a.classId
+        classes += ' ' + class_a
 
     row = [tk.Label(page) for _ in range(7)]
-    row.append(tk.Button(page, text='Details..', command=lambda a=course: og.show_course_info(a)))
+    row.append(tk.Button(page, text='Details..', command=lambda a=course: og.show_course_info(a,profs)))
+
     row[0]['text'] = str(course.course_id)
     row[1]['text'] = str(course.title)
     row[2]['text'] = str(course.course_type)
@@ -62,3 +66,17 @@ def display_course(page, course, n):  # In which page, display which course, and
 
     for i in range(8):
         row[i].grid(row=6 + n, column=i)
+
+
+# Extract info from the first worksheet in courses.xlsx
+# column1: ID; column2: title
+def update_courses(courses):
+    workbook = xl.load_workbook('courses.xlsx')
+    worksheet = workbook[workbook.sheetnames[0]]
+
+    i = 1
+    while worksheet['A' + str(i)].value:
+        id = str(worksheet['A' + str(i)].value)
+        title = str(worksheet['B' + str(i)].value)
+        courses[id] = Course.Course(id, title)
+        i += 1
