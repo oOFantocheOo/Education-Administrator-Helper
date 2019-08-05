@@ -12,7 +12,7 @@ class Prof:
         self.time_not_possible = tt.Timetable()
 
     def __str__(self):
-        return str(self.prof_id) + '\t' + str(self.name)
+        return str(self.name)
 
     def complete_info(self):
         tp = self.time_preferred.__str__()

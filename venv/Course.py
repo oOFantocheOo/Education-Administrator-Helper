@@ -80,5 +80,8 @@ class Course:
     def add_class_to_group(self, group, class_a):
         group[0].append(class_a)
 
+    def remove_group(self, group):
+        self.groups.remove(group)
+
     def add_group(self):
-        self.groups.append(([], []))
+        self.groups.append([[], []])

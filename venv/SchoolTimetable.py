@@ -8,7 +8,7 @@ class SchoolTimetable:
         self.title = title
         self.major = major
         self.week_num = 30
-        workbook = xl.load_workbook('../Input/requirements.xlsx')
+        workbook = xl.load_workbook('../Input/requirementlss.xx')
         worksheet = workbook[workbook.sheetnames[0]]
 
         messages = []

@@ -372,7 +372,7 @@ def show_course_info(course, profs, class_list, prev_page=None):
         column2[2]['text'] = str(course.course_type)
         column2[3]['text'] = week_str
         column2[4]['text'] = str(status)
-        column2[5]['text'] = str(course.groups)
+        column2[5]['text'] = course.groups
 
     c = tk.Toplevel()
     c.grab_set()
@@ -429,73 +429,6 @@ def show_course_info(course, profs, class_list, prev_page=None):
         course.period_required.show('Course Required Period', course)
         update_label()
 
-    def rebind_classes():
-        course.clear_classes()
-        update_label()
-        rc = tk.Toplevel()
-        rc.title('Rebind Classes')
-        rc.grab_set()
-        rc.focus_force()
-        label1 = tk.Label(rc, text='Major').pack()
-        entry1 = tk.Entry(rc)
-        entry1.pack()
-
-        label2 = tk.Label(rc, text='Grade').pack()
-        entry2 = tk.Entry(rc)
-        entry2.pack()
-
-        label3 = tk.Label(rc, text='Index').pack()
-        entry3 = tk.Entry(rc)
-        entry3.pack()
-
-        def find_class():
-            class_id = str(entry1.get()) + str(entry2.get()) + str(entry3.get())
-            if class_id not in class_list:
-                show_error_message('Class not found!')
-            else:
-                course.add_class(class_list[class_id])
-                update_label()
-                show_succeed_message()
-
-        button1 = tk.Button(rc, text='Add Class', command=find_class).pack()
-        button2 = tk.Button(rc, text='Finish', command=rc.destroy).pack()
-
-    def rebind_profs():
-
-        course.clear_profs()
-        update_label()
-
-        def find_prof_by_name():
-            p = op.find_prof(profs, entry1.get())
-            if not p:
-                show_error_message('Prof not found!')
-            else:
-                course.add_prof(p)
-                update_label()
-                show_succeed_message()
-
-        def find_prof_by_id():
-            if str(entry2.get()) not in profs:
-                show_error_message('Prof not found!')
-            else:
-                course.add_prof(profs[str(entry2.get())])
-                update_label()
-                show_succeed_message()
-
-        rp = tk.Toplevel()
-        rp.title('Rebind Profs')
-        rp.grab_set()
-        rp.focus_force()
-        label1 = tk.Label(rp, text='Name').pack()
-        entry1 = tk.Entry(rp)
-        entry1.pack()
-        button1 = tk.Button(rp, text='Add By Name', command=find_prof_by_name).pack()
-        label2 = tk.Label(rp, text='Prof ID').pack()
-        entry2 = tk.Entry(rp)
-        entry2.pack()
-        button2 = tk.Button(rp, text='Add By ID', command=find_prof_by_id).pack()
-        button3 = tk.Button(rp, text='Finish', command=rp.destroy).pack()
-
     def set_weeks():
         def save_checkbuttons():
             for i in range(30):
@@ -523,9 +456,124 @@ def show_course_info(course, profs, class_list, prev_page=None):
     tk.Button(c, text="Schedule This Course", command=set_should_be_scheduled).grid(s='s')
     tk.Button(c, text="Don't Schedule This Course", command=set_should_not_be_scheduled).grid(s='s')
     tk.Button(c, text="Set Required Period", command=set_required_period).grid(s='s')
-    tk.Button(c, text="Rebind Classes", command=rebind_classes).grid(s='s')
-    tk.Button(c, text="Rebind Profs", command=rebind_profs).grid(s='s')
-    tk.Button(c, text="Set Weeks", command=lambda: set_weeks()).grid(s='s')
+    tk.Button(c, text="Set Weeks", command=set_weeks).grid(s='s')
+    tk.Button(c, text="Manage Grouping", command=lambda: show_grouping_page(course, profs, class_list, c)).grid(s='s')
+
+
+def show_grouping_page(course, profs, class_list, parent_course_info):
+    gp = tk.Toplevel()
+    gp.focus_force()
+    gp.grab_set()
+
+    def refresh():
+        gp.destroy()
+        show_grouping_page(course, profs, class_list, parent_course_info)
+
+    def update_labels():
+        for i in range(len(course.groups)):
+            labels[i][0]['text']=course.groups[i][0]
+            labels[i][1]['text']=course.groups[i][1]
+
+    def save_and_quit():
+
+        for i in course.groups:
+            for j in i:
+                if not j:
+                    show_error_message('Group cannot be empty!')
+                    return
+        gp.destroy()
+        parent_course_info.destroy()
+        show_course_info(course, profs, class_list)
+
+    def rebind_classes(group):
+        group[0] = []
+        update_labels()
+        rc = tk.Toplevel()
+        rc.title('Rebind Classes')
+        rc.grab_set()
+        rc.focus_force()
+        label1 = tk.Label(rc, text='Major').pack()
+        entry1 = tk.Entry(rc)
+        entry1.pack()
+
+        label2 = tk.Label(rc, text='Grade').pack()
+        entry2 = tk.Entry(rc)
+        entry2.pack()
+
+        label3 = tk.Label(rc, text='Index').pack()
+        entry3 = tk.Entry(rc)
+        entry3.pack()
+
+        def find_class():
+            class_id = str(entry1.get()) + str(entry2.get()) + str(entry3.get())
+            if class_id not in class_list:
+                show_error_message('Class not found!')
+            else:
+                course.add_class_to_group(group, class_list[class_id])
+                update_labels()
+                show_succeed_message()
+
+        button1 = tk.Button(rc, text='Add Class', command=find_class).pack()
+        button2 = tk.Button(rc, text='Finish', command=rc.destroy).pack()
+
+    def rebind_profs(group):
+        group[1] = []
+        update_labels()
+
+        def find_prof_by_name():
+            p = op.find_prof(profs, entry1.get())
+            if not p:
+                show_error_message('Prof not found!')
+            else:
+                course.add_prof_to_group(group, p)
+                update_labels()
+                show_succeed_message()
+
+        def find_prof_by_id():
+            if str(entry2.get()) not in profs:
+                show_error_message('Prof not found!')
+            else:
+                course.add_prof_to_group(group, profs[str(entry2.get())])
+                update_labels()
+                show_succeed_message()
+
+        rp = tk.Toplevel()
+        rp.title('Rebind Profs')
+        rp.grab_set()
+        rp.focus_force()
+        label1 = tk.Label(rp, text='Name').pack()
+        entry1 = tk.Entry(rp)
+        entry1.pack()
+        button1 = tk.Button(rp, text='Add By Name', command=find_prof_by_name).pack()
+        label2 = tk.Label(rp, text='Prof ID').pack()
+        entry2 = tk.Entry(rp)
+        entry2.pack()
+        button2 = tk.Button(rp, text='Add By ID', command=find_prof_by_id).pack()
+        button3 = tk.Button(rp, text='Finish', command=rp.destroy).pack()
+
+    def add_group():
+        course.add_group()
+        refresh()
+
+    def remove_group(group):
+        course.remove_group(group)
+        refresh()
+
+    tk.Label(gp, text='Profs').grid(row=0, column=1)
+    tk.Label(gp, text='Classes').grid(row=0, column=0)
+    labels = []
+    for i in range(len(course.groups)):
+        labels.append([])
+        labels[-1].append(tk.Label(gp, text=course.groups[i][0]))
+        labels[-1][0].grid(row=i + 1, column=0)
+        labels[-1].append(tk.Label(gp, text=course.groups[i][1]))
+        labels[-1][1].grid(row=i + 1, column=1)
+        tk.Button(gp, text="Rebind Classes", command=lambda g=course.groups[i]: rebind_classes(g)).grid(row=i + 1, column=2)
+        tk.Button(gp, text="Rebind Profs", command=lambda g=course.groups[i]: rebind_profs(g)).grid(row=i + 1, column=3)
+        tk.Button(gp, text="Delete", command=lambda g=course.groups[i]: remove_group(g)).grid(row=i + 1, column=4)
+
+    tk.Button(gp, text='Add Group', command=add_group).grid(s='s')
+    tk.Button(gp, text='Save & Quit', command=save_and_quit).grid(s='s')
 
 
 def show_course_page_temp(profs, class_list, school_timetable):
