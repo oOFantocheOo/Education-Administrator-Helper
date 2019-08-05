@@ -1,3 +1,5 @@
+import Class
+import Course
 import operations_breaktime as ob
 import operations_class as ocl
 import operations_course as oc
@@ -10,7 +12,6 @@ course_info = oc.load_courses()
 classes_info = ocl.load_classes()
 break_time_info = ob.load_breaktime()
 settings = ost.load_settings()
-
 
 og.show_root_page(profs_info, course_info, classes_info, break_time_info, settings)
 

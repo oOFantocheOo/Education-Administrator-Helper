@@ -1,2 +1,5 @@
 WEEK = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-COURSE_GENERAL_INFO = ['ID', 'Title', 'Course type', 'Profs', 'Classes', 'Start week', 'End week']
+COURSE_GENERAL_INFO = ['ID', 'Title', 'Course type', 'Weeks']
+MAJOR = ['机械', '测控', '工程']
+GRADE = ['11', '12', '13', '14', '15', '16', '17', '18', '19']
+INDEX = ['01', '02', '03', '04', '05', '06', '07', '08', '卓越班', '中英班', '校交班']

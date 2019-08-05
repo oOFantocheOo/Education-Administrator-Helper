@@ -19,6 +19,8 @@ class Course:
         self.scheduled_manually = scheduled_manually
         self.should_be_scheduled = should_be_scheduled
         self.major = major
+        self.groups = []
+        self.weeks = [0 for _ in range(30)]
 
     def __str__(self):
         profs_names = ''
@@ -71,3 +73,12 @@ class Course:
 
     def add_prof(self, prof):
         self.taught_by_profs.append(prof.prof_id)
+
+    def add_prof_to_group(self, group, prof):
+        group[1].append(prof)
+
+    def add_class_to_group(self, group, class_a):
+        group[0].append(class_a)
+
+    def add_group(self):
+        self.groups.append(([], []))

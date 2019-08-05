@@ -4,7 +4,6 @@ import tkinter as tk
 import Course
 import openpyxl as xl
 import operations_gui as og
-import operations_profs as op
 
 
 def load_courses():
@@ -45,7 +44,7 @@ def selected_courses_info(courses):
     return string
 
 
-def display_course(page, course, n, profs):  # In which page, display which course, and this is the nth course to display
+def display_course(page, course, n, profs, class_list):  # In which page, display which course, and this is the nth course to display
     profs_names = ''
     classes = ''
     for prof in course.taught_by_profs:
@@ -53,18 +52,22 @@ def display_course(page, course, n, profs):  # In which page, display which cour
     for class_a in course.class_list:
         classes += ' ' + class_a
 
-    row = [tk.Label(page) for _ in range(7)]
-    row.append(tk.Button(page, text='Details..', command=lambda a=course: og.show_course_info(a,profs)))
+    row = [tk.Label(page) for _ in range(4)]
+    row.append(tk.Button(page, text='Details..', command=lambda a=course: og.show_course_info(a, profs, class_list)))
+    week_str = ''
+    for i in range(len(course.weeks)):
+        if course.weeks[i] == 1 or course.weeks[i] == '1':
+            week_str += str(i+1) + ' '
+
+    if not week_str:
+        week_str='N/A'
 
     row[0]['text'] = str(course.course_id)
     row[1]['text'] = str(course.title)
     row[2]['text'] = str(course.course_type)
-    row[3]['text'] = str(profs_names)
-    row[4]['text'] = str(classes)
-    row[5]['text'] = str(course.week_start)
-    row[6]['text'] = str(course.week_end)
+    row[3]['text'] = week_str
 
-    for i in range(8):
+    for i in range(5):
         row[i].grid(row=6 + n, column=i)
 
 

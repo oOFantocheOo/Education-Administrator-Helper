@@ -6,8 +6,9 @@ import operations_gui as og
 
 
 class Timetable:
-    def __init__(self):
+    def __init__(self, title=''):
         self.timetable = [['0' for x in range(7)] for y in range(12)]
+        self.title = title
 
     def all_zeros(self):
         def all_zeros_1d(L):
@@ -23,7 +24,7 @@ class Timetable:
         for i in range(len(self.timetable)):
             for j in range(len(self.timetable[0])):
                 if self.timetable[i][j] == 1 or self.timetable[i][j] == '1':
-                    res += c.WEEK[j] + ' period ' + str(i) + ' '
+                    res += c.WEEK[j] + ' period ' + str(int(i) + 1) + ' '
         return res if res else str(self.timetable)
 
     def show(self, page_name='.', parent=None):
@@ -92,12 +93,14 @@ class Timetable:
 
     # Check if every time when Timetable_2[i][j] == value_2, self[i][j] == value_1
     def check(self, Timetable_2, value_1, value_2):
+        err = []
         for r in range(len(self.timetable)):
             for c in range(len(self.timetable[0])):
                 if str(Timetable_2.timetable[r][c]) == str(value_2):
                     if str(self.timetable[r][c]) != value_1:
-                        print (self)
-        return ()
+                        err.append(self.title + '[' + str(r) + '][' + str(c) + "] shouldn't be " + self.timetable[r][c] + '; correction: ' + str(value_1))
+
+        return err
 
     # Set self[i][j] == value_1 every time when Timetable_2[i][j] == value_2
     def change(self, Timetable_2, value_1, value_2):
@@ -105,3 +108,15 @@ class Timetable:
             for c in range(len(self.timetable[0])):
                 if str(Timetable_2.timetable[r][c]) == str(value_2):
                     self.timetable[r][c] = value_1
+
+    # Return the least occupied day in a week; 0:Monday, 6:Sunday
+    def least_occupied(self):
+        idx, empty_slot = -1, -1
+        for c in range(7):
+            cur_empty_slot = 0
+            for r in range(12):
+                if self.timetable[r][c] == '0':
+                    cur_empty_slot += 1
+            if cur_empty_slot > empty_slot:
+                idx, empty_slot = c, cur_empty_slot
+        return idx
