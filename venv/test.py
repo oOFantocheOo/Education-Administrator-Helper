@@ -1,1 +1,1 @@
-print(ord('A'))
+print('1' in [1,'1'])

@@ -2,14 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab634377-4e7c-490d-9c2e-94d9370fd5b8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/venv/Group.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Constants.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/Course.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Course.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/Prof.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Prof.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/SchoolTimetable.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/SchoolTimetable.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Timetable.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Timetable.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/classes_file" beforeDir="false" afterPath="$PROJECT_DIR$/venv/classes_file" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/courses_file" beforeDir="false" afterPath="$PROJECT_DIR$/venv/courses_file" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/operations_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/operations_class.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/operations_course.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/operations_course.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/operations_gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/operations_gui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/operations_profs.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/operations_profs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/profs_file" beforeDir="false" afterPath="$PROJECT_DIR$/venv/profs_file" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/settings_file" beforeDir="false" afterPath="$PROJECT_DIR$/venv/settings_file" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,10 +29,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/venv/main.py">
+        <entry file="file://$PROJECT_DIR$/venv/SchoolTimetable.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="32" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
+            <state relative-caret-position="68">
+              <caret line="83" column="45" selection-start-line="83" selection-start-column="45" selection-end-line="83" selection-end-column="45" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -32,101 +41,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/operations_gui.py">
+        <entry file="file://$PROJECT_DIR$/venv/Group.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="378" column="19" selection-start-line="378" selection-start-column="19" selection-end-line="378" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-                <element signature="e#233#435#0" />
-                <element signature="e#470#575#0" />
-                <element signature="e#613#882#0" />
-                <element signature="e#959#3540#0" />
-                <element signature="e#3573#3577#0" />
-                <element signature="e#3611#5872#0" />
-                <element signature="e#5950#9520#0" />
-                <element signature="e#5971#6453#0" />
-                <element signature="e#6499#6951#0" />
-                <element signature="e#7708#7855#0" />
-                <element signature="e#9502#9714#0" />
-                <element signature="e#9748#9775#0" />
-                <element signature="e#9736#10892#0" />
-                <element signature="e#10941#12567#0" />
-                <element signature="e#14893#15324#0" />
-                <element signature="e#17200#17829#0" />
-                <element signature="e#16677#20424#0" />
-                <element signature="e#19067#19108#0" />
-                <element signature="e#16884#17026#0" />
-                <element signature="e#16893#17069#0" />
-                <element signature="e#16913#17879#0" />
-                <element signature="e#17914#19076#0" />
-                <element signature="e#19225#19261#0" />
-                <element signature="e#19300#19344#0" />
-                <element signature="e#18326#18477#0" />
-              </folding>
+            <state relative-caret-position="119">
+              <caret line="7" column="26" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/Constants.py">
+        <entry file="file://$PROJECT_DIR$/venv/Class.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" selection-start-line="5" selection-end-line="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/Course.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1190">
-              <caret line="75" selection-start-line="75" selection-end-line="75" />
-              <folding>
-                <element signature="e#1905#2065#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/Timetable.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="61" column="16" selection-start-line="34" selection-start-column="8" selection-end-line="61" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="12" selection-start-column="12" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/Prof.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="14" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/SchoolTimetable.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-374">
-              <caret line="17" column="32" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
-              <folding>
-                <element signature="e#0#22#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="153">
+              <caret line="9" column="51" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -142,20 +69,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>week</find>
-      <find>breaktime_page</find>
-      <find>height</find>
-      <find>mainl</find>
-      <find>tk()</find>
-      <find>Tk()</find>
-      <find>key</find>
-      <find>show_suc</find>
-      <find>Entry</find>
-      <find>widget</find>
-      <find>side='left'</find>
-      <find>period_required</find>
-      <find>rule</find>
-      <find>column2</find>
       <find>find</find>
       <find>pack</find>
       <find>3</find>
@@ -172,6 +85,20 @@
       <find>show_course</find>
       <find>lambda a</find>
       <find>Checkbutton</find>
+      <find>week</find>
+      <find>week_end</find>
+      <find>add_class_to_group</find>
+      <find>update_labels</find>
+      <find>eek does</find>
+      <find>group</find>
+      <find>course_info</find>
+      <find>grouping</find>
+      <find>schedule_to</find>
+      <find>preferred</find>
+      <find>show_school_timetable_widget</find>
+      <find>SchoolSche</find>
+      <find>SchoolSchedule</find>
+      <find>Jump</find>
     </findStrings>
     <replaceStrings>
       <replace>courses</replace>
@@ -185,6 +112,7 @@
       <replace>grid</replace>
       <replace>settings</replace>
       <replace>row</replace>
+      <replace>second</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -206,21 +134,24 @@
         <option value="$PROJECT_DIR$/operations_profs.py" />
         <option value="$PROJECT_DIR$/d.py" />
         <option value="$PROJECT_DIR$/venv/operations_breaktime.py" />
-        <option value="$PROJECT_DIR$/venv/operations_class.py" />
         <option value="$PROJECT_DIR$/venv/Class.py" />
         <option value="$PROJECT_DIR$/venv/operations_settings.py" />
         <option value="$PROJECT_DIR$/venv/Settings.py" />
         <option value="$PROJECT_DIR$/venv/test2.py" />
-        <option value="$PROJECT_DIR$/venv/operations_profs.py" />
-        <option value="$PROJECT_DIR$/venv/test.py" />
-        <option value="$PROJECT_DIR$/venv/Timetable.py" />
+        <option value="$PROJECT_DIR$/venv/main.py" />
         <option value="$PROJECT_DIR$/venv/operations_course.py" />
+        <option value="$PROJECT_DIR$/venv/test.py" />
+        <option value="$PROJECT_DIR$/venv/Scripts/group.py" />
+        <option value="$PROJECT_DIR$/venv/group.py" />
+        <option value="$PROJECT_DIR$/venv/Prof.py" />
         <option value="$PROJECT_DIR$/venv/Constants.py" />
         <option value="$PROJECT_DIR$/venv/Course.py" />
-        <option value="$PROJECT_DIR$/venv/SchoolTimetable.py" />
-        <option value="$PROJECT_DIR$/venv/main.py" />
         <option value="$PROJECT_DIR$/venv/operations_gui.py" />
-        <option value="$PROJECT_DIR$/venv/Prof.py" />
+        <option value="$PROJECT_DIR$/venv/operations_profs.py" />
+        <option value="$PROJECT_DIR$/venv/Group.py" />
+        <option value="$PROJECT_DIR$/venv/operations_class.py" />
+        <option value="$PROJECT_DIR$/venv/Timetable.py" />
+        <option value="$PROJECT_DIR$/venv/SchoolTimetable.py" />
       </list>
     </option>
   </component>
@@ -261,6 +192,13 @@
               <item name="&lt; Python 3.7 (EAH) &gt;" type="70bed36:NamedLibraryElementNode" />
               <item name="venv" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="EAH" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (EAH) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="venv" type="462c0819:PsiDirectoryNode" />
+              <item name="Scripts" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -269,7 +207,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -398,8 +336,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.operations_gui" />
         <item itemvalue="Python.test" />
+        <item itemvalue="Python.operations_gui" />
         <item itemvalue="Python.test2" />
         <item itemvalue="Python.SchoolTimetable" />
       </list>
@@ -546,7 +484,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564987282353</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Finished database system&#10;To do:&#10;- Improve general GUI(images, etc.)&#10;- Create methods to import from .xlsl to initialize SchoolTimetable and setting Courses&#10;- Finish algorithms to arrange SchoolTimetable(in Rules, how to arrange: (i)closely pack everything; (ii)set priority to periods that are most empty&#10;- Chinese version">
+      <created>1564995388350</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1564995388350</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TodoView">
@@ -562,7 +507,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.15437302" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15437302" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -580,25 +525,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15437302" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.34236187" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32936078" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32936078" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout-to-restore>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="commmit" />
@@ -610,7 +536,19 @@
     <MESSAGE value="improve GUI&#10;To do:&#10;- Improve general GUI(images, etc.)&#10;- Create methods to import from .csv to initialize SchoolTimetable and setting Courses&#10;- Finish algorithms to arrange SchoolTimetable(in Rules, how to arrange: (i)closely pack everything; (ii)set priority to periods that are most empty&#10;- Chinese version" />
     <MESSAGE value="improve performance&#10;create some of import methods from .xlsl files&#10;To do:&#10;- Improve general GUI(images, etc.)&#10;- Create methods to import from .xlsl to initialize SchoolTimetable and setting Courses&#10;- Finish algorithms to arrange SchoolTimetable(in Rules, how to arrange: (i)closely pack everything; (ii)set priority to periods that are most empty&#10;- Chinese version" />
     <MESSAGE value="More general methods to operate the Course class&#10;To do:&#10;- Improve general GUI(images, etc.)&#10;- Create methods to import from .xlsl to initialize SchoolTimetable and setting Courses&#10;- Finish algorithms to arrange SchoolTimetable(in Rules, how to arrange: (i)closely pack everything; (ii)set priority to periods that are most empty&#10;- Chinese version" />
-    <option name="LAST_COMMIT_MESSAGE" value="More general methods to operate the Course class&#10;To do:&#10;- Improve general GUI(images, etc.)&#10;- Create methods to import from .xlsl to initialize SchoolTimetable and setting Courses&#10;- Finish algorithms to arrange SchoolTimetable(in Rules, how to arrange: (i)closely pack everything; (ii)set priority to periods that are most empty&#10;- Chinese version" />
+    <MESSAGE value="Finished database system&#10;To do:&#10;- Improve general GUI(images, etc.)&#10;- Create methods to import from .xlsl to initialize SchoolTimetable and setting Courses&#10;- Finish algorithms to arrange SchoolTimetable(in Rules, how to arrange: (i)closely pack everything; (ii)set priority to periods that are most empty&#10;- Chinese version" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished database system&#10;To do:&#10;- Improve general GUI(images, etc.)&#10;- Create methods to import from .xlsl to initialize SchoolTimetable and setting Courses&#10;- Finish algorithms to arrange SchoolTimetable(in Rules, how to arrange: (i)closely pack everything; (ii)set priority to periods that are most empty&#10;- Chinese version" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/venv/SchoolTimetable.py</url>
+          <line>83</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../deepnude_official-master/main.py" />
@@ -622,20 +560,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/d.py" />
-    <entry file="file://$PROJECT_DIR$/venv/operations_class.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/operations_breaktime.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -653,21 +577,46 @@
     <entry file="file://$PROJECT_DIR$/venv/test2.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Class.py">
+    <entry file="file://$PROJECT_DIR$/venv/Scripts/group.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="12" selection-start-column="12" selection-end-column="12" />
+          <caret column="9" selection-start-column="9" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/operations_course.py">
+    <entry file="file://$PROJECT_DIR$/venv/Settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="46" column="55" selection-start-line="46" selection-start-column="55" selection-end-line="46" selection-end-column="55" />
+        <state relative-caret-position="170">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Prof.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="39" column="56" selection-start-line="39" selection-start-column="56" selection-end-line="39" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Course.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#1122#1852#0" />
-            <element signature="e#1954#2259#0" />
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Timetable.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="132" column="32" selection-start-line="132" selection-start-column="32" selection-end-line="132" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -675,7 +624,7 @@
     <entry file="file://$PROJECT_DIR$/venv/operations_profs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
-          <caret line="31" column="24" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+          <caret line="62" column="65" selection-start-line="62" selection-start-column="65" selection-end-line="62" selection-end-column="65" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
             <element signature="e#630#925#0" />
@@ -683,96 +632,156 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/test.py">
+    <entry file="file://$PROJECT_DIR$/venv/operations_class.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="12" selection-start-column="12" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/SchoolTimetable.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-374">
-          <caret line="17" column="32" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Course.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1190">
-          <caret line="75" selection-start-line="75" selection-end-line="75" />
-          <folding>
-            <element signature="e#1905#2065#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Timetable.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="61" column="16" selection-start-line="34" selection-start-column="8" selection-end-line="61" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Prof.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="14" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+        <state relative-caret-position="357">
+          <caret line="21" column="23" selection-start-line="20" selection-start-column="63" selection-end-line="21" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/venv/operations_gui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="378" column="19" selection-start-line="378" selection-start-column="19" selection-end-line="378" selection-end-column="19" />
+        <state relative-caret-position="175">
+          <caret line="648" column="105" selection-start-line="648" selection-start-column="105" selection-end-line="648" selection-end-column="105" />
           <folding>
-            <element signature="e#0#20#0" expanded="true" />
-            <element signature="e#233#435#0" />
-            <element signature="e#470#575#0" />
-            <element signature="e#613#882#0" />
-            <element signature="e#959#3540#0" />
-            <element signature="e#3573#3577#0" />
-            <element signature="e#3611#5872#0" />
-            <element signature="e#5950#9520#0" />
-            <element signature="e#5971#6453#0" />
-            <element signature="e#6499#6951#0" />
-            <element signature="e#7708#7855#0" />
-            <element signature="e#9502#9714#0" />
-            <element signature="e#9748#9775#0" />
-            <element signature="e#9736#10892#0" />
-            <element signature="e#10941#12567#0" />
-            <element signature="e#14893#15324#0" />
-            <element signature="e#17200#17829#0" />
-            <element signature="e#16677#20424#0" />
-            <element signature="e#19067#19108#0" />
-            <element signature="e#16884#17026#0" />
-            <element signature="e#16893#17069#0" />
-            <element signature="e#16913#17879#0" />
-            <element signature="e#17914#19076#0" />
-            <element signature="e#19225#19261#0" />
-            <element signature="e#19300#19344#0" />
-            <element signature="e#18326#18477#0" />
+            <element signature="e#226#458#0" />
+            <element signature="e#493#598#0" />
+            <element signature="e#636#905#0" />
+            <element signature="e#1986#2225#0" />
+            <element signature="e#2026#2103#0" />
+            <element signature="e#3559#3563#0" />
+            <element signature="e#3597#5858#0" />
+            <element signature="e#3629#4017#0" />
+            <element signature="e#4054#4271#0" />
+            <element signature="e#4311#4531#0" />
+            <element signature="e#4573#4671#0" />
+            <element signature="e#4928#5244#0" />
+            <element signature="e#5926#9480#0" />
+            <element signature="e#5969#6432#0" />
+            <element signature="e#6478#6942#0" />
+            <element signature="e#7249#7344#0" />
+            <element signature="e#7468#7548#0" />
+            <element signature="e#7655#7803#0" />
+            <element signature="e#8718#9452#0" />
+            <element signature="e#8792#9299#0" />
+            <element signature="e#9517#9730#0" />
+            <element signature="e#9773#9800#0" />
+            <element signature="e#9841#10997#0" />
+            <element signature="e#9870#10035#0" />
+            <element signature="e#11046#12672#0" />
+            <element signature="e#11074#11316#0" />
+            <element signature="e#11359#11441#0" />
+            <element signature="e#11484#11598#0" />
+            <element signature="e#11493#11557#0" />
+            <element signature="e#11611#11698#0" />
+            <element signature="e#11821#11940#0" />
+            <element signature="e#12277#12350#0" />
+            <element signature="e#12744#17092#0" />
+            <element signature="e#12772#14168#0" />
+            <element signature="e#12808#13063#0" />
+            <element signature="e#12860#13042#0" />
+            <element signature="e#13732#13827#0" />
+            <element signature="e#14290#14406#0" />
+            <element signature="e#14736#14809#0" />
+            <element signature="e#14920#14974#0" />
+            <element signature="e#15022#15080#0" />
+            <element signature="e#15125#15180#0" />
+            <element signature="e#15229#15288#0" />
+            <element signature="e#15329#15760#0" />
+            <element signature="e#15376#15452#0" />
+            <element signature="e#15508#15667#0" />
+            <element signature="e#15791#16452#0" />
+            <element signature="e#15828#15957#0" />
+            <element signature="e#16095#16370#0" />
+            <element signature="e#16130#16370#0" />
+            <element signature="e#17170#21145#0" />
+            <element signature="e#17256#17342#0" />
+            <element signature="e#17377#17562#0" />
+            <element signature="e#17425#17562#0" />
+            <element signature="e#17598#17873#0" />
+            <element signature="e#17634#17763#0" />
+            <element signature="e#17662#17763#0" />
+            <element signature="e#17692#17763#0" />
+            <element signature="e#17914#18850#0" />
+            <element signature="e#18411#18698#0" />
+            <element signature="e#18612#18698#0" />
+            <element signature="e#18889#20040#0" />
+            <element signature="e#18973#19187#0" />
+            <element signature="e#19121#19187#0" />
+            <element signature="e#19232#19483#0" />
+            <element signature="e#19355#19483#0" />
+            <element signature="e#20071#20107#0" />
+            <element signature="e#20146#20190#0" />
+            <element signature="e#20364#21004#0" />
+            <element signature="e#21216#21382#0" />
+            <element signature="e#21249#21320#0" />
+            <element signature="e#21460#22003#0" />
+            <element signature="e#21493#21558#0" />
+            <element signature="e#21609#21680#0" />
+            <element signature="e#22057#22556#0" />
+            <element signature="e#22082#22290#0" />
+            <element signature="e#22145#22200#0" />
+            <element signature="e#22227#22290#0" />
+            <element signature="e#22679#22734#0" />
+            <element signature="e#23585#23793#0" />
+            <element signature="e#23648#23703#0" />
+            <element signature="e#23730#23793#0" />
+            <element signature="e#24161#25261#0" />
+            <element signature="e#24587#25243#0" />
+            <element signature="e#24618#25243#0" />
+            <element signature="e#24693#25243#0" />
+            <element signature="e#24738#24842#0" />
+            <element signature="e#24926#25210#0" />
+            <element signature="e#25295#25351#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/venv/Constants.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="289">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/main.py">
+    <entry file="file://$PROJECT_DIR$/venv/Group.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="32" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
+        <state relative-caret-position="119">
+          <caret line="7" column="26" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/operations_course.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1836">
+          <caret line="108" selection-start-line="108" selection-end-line="108" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Class.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="51" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/SchoolTimetable.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="83" column="45" selection-start-line="83" selection-start-column="45" selection-end-line="83" selection-end-column="45" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>

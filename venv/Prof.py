@@ -32,3 +32,9 @@ class Prof:
     def clear_time_preference(self):
         self.time_preferred = tt.Timetable()
         self.time_not_possible = tt.Timetable()
+
+    def get_time_preferred_as_list(self):
+        return self.time_preferred.get_ones_as_list()
+
+    def get_time_impossible_as_list(self):
+        return self.time_not_possible.get_ones_as_list()

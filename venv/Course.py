@@ -1,9 +1,10 @@
 import Timetable as tt
+import operations_gui as og
 
 
 class Course:
     def __init__(self, course_id, title, course_type='', major=' ', week_start='', week_end='', class_list=[], taught_by_profs=[],
-                 period_required=tt.Timetable(), location='', scheduled_manually=False, should_be_scheduled=True):
+                 period_required=tt.Timetable(), location='', scheduled_manually=False, should_be_scheduled=False):
         self.course_type = course_type
         self.course_id = str(course_id)
         self.title = title
@@ -20,7 +21,7 @@ class Course:
         self.should_be_scheduled = should_be_scheduled
         self.major = major
         self.groups = []
-        self.weeks = [0 for _ in range(30)]
+        self.weeks = ['0' for _ in range(30)]
 
     def __str__(self):
         profs_names = ''
@@ -37,18 +38,11 @@ class Course:
         for prof in self.taught_by_profs:
             profs_names = profs_names + prof.name
         return str(self.course_id) + '\n' + str(self.title) + '\n' + str(profs_names) + '\n' + str(
-            *self.class_list) + '\n' + str(self.week_start) + '\n' + str(self.week_end) + '\n' + status
+            *self.class_list) + '\n' + status
 
     def complete_info(self):
         time = self.period_allocated if self.period_allocated else 'Not Allocated Yet!'
         return self.__str__() + '\n' + str(self.period_required) + '\n' + str(self.location) + '\n' + str(time)
-
-    def set_info(self, course_type, week_start, week_end, title, location=''):
-        self.course_type = course_type
-        self.title = title
-        self.week_start = week_start
-        self.week_end = week_end
-        self.location = location
 
     def set_scheduled_manually(self):
         self.scheduled_manually = True
@@ -75,13 +69,22 @@ class Course:
         self.taught_by_profs.append(prof.prof_id)
 
     def add_prof_to_group(self, group, prof):
-        group[1].append(prof)
+        if prof.prof_id in group[1]:
+            og.show_error_message(prof.name + ' already added to this group')
+            return
+        group[1].append(prof.prof_id)
+        og.show_succeed_message()
 
     def add_class_to_group(self, group, class_a):
-        group[0].append(class_a)
+        if class_a.classId in group[0]:
+            og.show_error_message(class_a.classId + 'already added to this group')
+            return
+        group[0].append(class_a.classId)
+        og.show_succeed_message()
 
     def remove_group(self, group):
         self.groups.remove(group)
 
     def add_group(self):
         self.groups.append([[], []])
+

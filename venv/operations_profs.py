@@ -39,3 +39,25 @@ def update_profs(profs):
         id = str(worksheet['B' + str(i)].value)
         profs[id] = Prof.Prof(id, name)
         i += 1
+
+
+def list_prof_ids_to_names(profs, ids):
+    str = ''
+    for i in ids:
+        str += profs[i].name + ' '
+    return str
+
+
+def profs_are_available(profs, ids, weeks, period, date):
+    for pid in ids:
+        for w in range(30):
+            if weeks[w] in ['1', 1]:
+                if not profs[pid].schedule[w].is_available(period, date):
+                    return False
+    return True
+
+
+def change(profs, prof_id, weeks, period, date, content):
+    for w in range(30):
+        if weeks[w] in [1, '1']:
+            profs[prof_id].schedule[w].change_one_period(period, date, content)

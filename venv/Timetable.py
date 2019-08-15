@@ -98,11 +98,11 @@ class Timetable:
             for c in range(len(self.timetable[0])):
                 if str(Timetable_2.timetable[r][c]) == str(value_2):
                     if str(self.timetable[r][c]) != value_1:
-                        err.append(self.title + '[' + str(r) + '][' + str(c) + "] shouldn't be " + self.timetable[r][c] + '; correction: ' + str(value_1))
+                        err.append(self.title + '[' + str(r) + '][' + str(c) + "] shouldn't be " + self.timetable[r][c] + '; it will be overwritten; correction: ' + str(value_1))
 
         return err
 
-    # Set self[i][j] == value_1 every time when Timetable_2[i][j] == value_2
+    # Set self[i][j] = value_1 every time when Timetable_2[i][j] == value_2
     def change(self, Timetable_2, value_1, value_2):
         for r in range(len(self.timetable)):
             for c in range(len(self.timetable[0])):
@@ -120,3 +120,20 @@ class Timetable:
             if cur_empty_slot > empty_slot:
                 idx, empty_slot = c, cur_empty_slot
         return idx
+
+    def get_ones_as_list(self):
+        res = []
+        for i in range(12):
+            for j in range(7):
+                if self.timetable[i][j] in [1, '1']:
+                    res.append((i, j))
+        return res
+
+    def is_available(self, period, date):
+        if self.timetable[period][date] in [0, '0']:
+            return True
+        else:
+            return False
+
+    def change_one_period(self, period, date, content):
+        self.timetable[period][date] = content

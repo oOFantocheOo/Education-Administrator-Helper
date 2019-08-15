@@ -13,7 +13,6 @@ classes_info = ocl.load_classes()
 break_time_info = ob.load_breaktime()
 settings = ost.load_settings()
 
-
 og.show_root_page(profs_info, course_info, classes_info, break_time_info, settings)
 
 op.save_profs(profs_info)

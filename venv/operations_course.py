@@ -57,10 +57,10 @@ def display_course(page, course, n, profs, class_list):  # In which page, displa
     week_str = ''
     for i in range(len(course.weeks)):
         if course.weeks[i] == 1 or course.weeks[i] == '1':
-            week_str += str(i+1) + ' '
+            week_str += str(i + 1) + ' '
 
     if not week_str:
-        week_str='N/A'
+        week_str = 'N/A'
 
     row[0]['text'] = str(course.course_id)
     row[1]['text'] = str(course.title)
@@ -83,3 +83,26 @@ def update_courses(courses):
         title = str(worksheet['B' + str(i)].value)
         courses[id] = Course.Course(id, title)
         i += 1
+
+
+def auto_classify(courses, language='Chinese'):
+    if language == 'Chinese':
+        for i in courses.keys():
+            cur = courses[i]
+            if '实验' in cur.title:
+                cur.course_type = '实验'
+            elif '劳动' in cur.title:
+                cur.course_type = '劳动'
+            else:
+                cur.course_type = '课程'
+    elif language == 'English':
+        for i in courses.keys():
+            cur = courses[i]
+            cur.course_type = 'Course'
+
+def refresh_courses(courses):
+    for cid in courses.keys():
+        cur=courses[cid]
+        courses[cid]=Course.Course(cid,cur.title)
+    auto_classify(courses)
+
