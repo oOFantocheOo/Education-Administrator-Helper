@@ -3,15 +3,16 @@ from tkinter import ttk
 
 import Constants as c
 import SchoolTimetable as st
+import languages as l
 import operations_course as oc
 import operations_profs as op
 import operations_settings as ost
 
 
-def show_succeed_message():
+def show_succeed_message(language=0):
     temp = tk.Toplevel()
     temp.grab_set()
-    tk.Label(temp, text='Succeeded!').pack()
+    tk.Label(temp, text=l.succeeded[language]).pack()
     b = tk.Button(temp, text='OK', command=temp.destroy, default='active')
     b.pack()
     temp.focus_force()
@@ -26,13 +27,15 @@ def show_waiting_message():
     return temp
 
 
-def show_error_message(error):
+def show_error_message(error, language=0):
     temp = tk.Toplevel()
     temp.grab_set()
     temp.title('Error')
-    tk.Label(temp, text='\nError: ' + error + '\n').pack()
-    tk.Button(temp, text='OK', command=temp.destroy, default='active').pack()
+    tk.Label(temp, text=l.error[language] + error + '\n').pack()
+    b = tk.Button(temp, text='OK', command=temp.destroy, default='active')
+    b.pack()
     temp.focus_force()
+    b.focus_force()
     temp.geometry('300x100')
     return temp
 
@@ -71,28 +74,30 @@ def show_root_page(profs, courses, class_list, break_time, settings):
             school_timetable[0].generate_school_timetable(profs, courses, class_list, break_time, settings)
 
     root.geometry('600x400')
-    root.title("Educational Administration Helper")
-    button1 = tk.Button(root, text="Set Timetable", command=lambda: show_school_timetable_widget(root))
+    root.title(l.EAH[settings.language])
+    button1 = tk.Button(root, text=l.set_timetable[settings.language], command=lambda: show_school_timetable_widget(root))
     button1.pack()
     button1.focus_force()
-    label = tk.Label(root, text='School timetable not initialized yet!')
+    label = tk.Label(root, text=l.st_not_initialized[settings.language])
     label.pack()
-    button2 = tk.Button(root, text="Prof info", command=lambda: show_prof_page(profs))
+    button2 = tk.Button(root, text=l.prof_info[settings.language], command=lambda: show_prof_page(profs))
     button2.pack()
-    button3 = tk.Button(root, text="Course info", command=lambda: show_course_page(courses, profs, class_list))
+    button3 = tk.Button(root, text=l.course_info[settings.language], command=lambda: show_course_page(courses, profs, class_list))
     button3.pack()
-    button4 = tk.Button(root, text="Class info", command=lambda: show_class_page(class_list))
+    button4 = tk.Button(root, text=l.class_info[settings.language], command=lambda: show_class_page(class_list))
     button4.pack()
-    button5 = tk.Button(root, text="Set Break Time", command=lambda: show_breaktime_page(break_time))
+    button5 = tk.Button(root, text=l.set_break_time[settings.language], command=lambda: show_breaktime_page(break_time))
     button5.pack()
-    button6 = tk.Button(root, text="Settings", command=lambda: show_settings_page(settings))
+    button6 = tk.Button(root, text=l.settings[settings.language])
     button6.pack()
-    button7 = tk.Button(root, text='Check Conflicts', command=show_checking_page)
+    button7 = tk.Button(root, text=l.check_conflicts[settings.language], command=show_checking_page)
     button7.pack()
-    button8 = tk.Button(root, text='Generate Timetable', command=check_and_build_school_timetable)
+    button8 = tk.Button(root, text=l.generate_timetable[settings.language], command=check_and_build_school_timetable)
     button8.pack()
-    button9 = tk.Button(root, text='Check Schedule', command=lambda: show_schedules_page(profs, courses, class_list, school_timetable[0]))
+    button9 = tk.Button(root, text=l.check_schedule[settings.language], command=lambda: show_schedules_page(profs, courses, class_list, school_timetable[0]))
     button9.pack()
+    buttons_and_label = [button1, button2, button3, button4, button5, button6, button7, button8, button9, label]
+    button6['command'] = lambda: show_settings_page(settings, buttons_and_label)
     root.mainloop()
 
 
@@ -260,12 +265,22 @@ def show_breaktime_page(breaktime):
     breaktime.show('Breaktime')
 
 
-def show_settings_page(settings):
+def show_settings_page(settings, buttons):
     def save_and_quit():
         settings.language = variable_language.get()
         settings.arranging_rule = variable_rule.get()
         ost.save_settings(settings)
         settings_page.destroy()
+        buttons[0]['text'] = l.set_timetable[settings.language]
+        buttons[1]['text'] = l.prof_info[settings.language]
+        buttons[2]['text'] = l.course_info[settings.language]
+        buttons[3]['text'] = l.class_info[settings.language]
+        buttons[4]['text'] = l.set_break_time[settings.language]
+        buttons[5]['text'] = l.settings[settings.language]
+        buttons[6]['text'] = l.check_conflicts[settings.language]
+        buttons[7]['text'] = l.generate_timetable[settings.language]
+        buttons[8]['text'] = l.check_schedule[settings.language]
+        buttons[9]['text'] = l.st_not_initialized[settings.language]
 
     settings_page = tk.Toplevel()
     settings_page.title("Settings")
@@ -646,7 +661,7 @@ def show_prof_schedule(profs, p, courses):
             l.grid(row=3, column=3)
             labels = schedule_to_gui(courses, prof.schedule[week], psp, 4, 0)
             labels.append(l)
-            tk.Button(psp, text='Jump to Week', command=lambda: update_info(prof, int(week_entry.get())-1, labels)).grid(row=0, column=7)
+            tk.Button(psp, text='Jump to Week', command=lambda: update_info(prof, int(week_entry.get()) - 1, labels)).grid(row=0, column=7)
             tk.Button(psp, text='Previous Week', command=lambda: update_info(prof, week - 1, labels)).grid(row=1, column=6)
             tk.Button(psp, text='Next Week', command=lambda: update_info(prof, week + 1, labels)).grid(row=2, column=6)
 

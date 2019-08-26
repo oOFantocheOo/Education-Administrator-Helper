@@ -3,6 +3,7 @@ import Timetable as tt
 import operations_class as oc
 import operations_gui as og
 import operations_profs as op
+import languages as l
 
 
 class SchoolTimetable:
@@ -92,7 +93,7 @@ class SchoolTimetable:
         for pid in profs.keys():
             profs[pid].schedule = []  # Clear all schedule
             for i in range(self.week_num):
-                profs[pid].schedule.append(tt.Timetable(title=profs[pid].name + "'s Timetable of week " + str(i)))
+                profs[pid].schedule.append(tt.Timetable(title=profs[pid].name + l.timetable_of_week[settings.language] + str(i)))
                 # in Prof.schedule, for Timetable[i][j],
                 # 0: not occupied;
                 # not possible: the prof required not to teach in this period(set in Prof info page;
@@ -102,7 +103,7 @@ class SchoolTimetable:
         for cid in class_list.keys():
             class_list[cid].schedule = []  # Clear all schedule
             for i in range(self.week_num):
-                class_list[cid].schedule.append(tt.Timetable(title=class_list[cid].classId + "'s Timetable of week " + str(i)))
+                class_list[cid].schedule.append(tt.Timetable(title=class_list[cid].classId + l.timetable_of_week[settings.language] + str(i)))
                 # in Class.schedule, for Timetable[i][j],
                 # 0: not occupied;
                 # break time: the period is in break time, thus not allocated with any courses;
@@ -198,7 +199,6 @@ class SchoolTimetable:
 
         # to be implemented
         print(second)
-
         # iii)Allocate the remaining courses according to rules
         err = []
         if settings.arranging_rule == 0:  # if set to priority to periods that are most empty
@@ -231,17 +231,11 @@ class SchoolTimetable:
                                         second_period = (p, d)
                                         break
                                 if second_period_is_chosen:
-                                    print('break1')
-                                    print(first_period)
                                     break
 
                         if first_period_is_chosen and second_period_is_chosen:
-                            print('break2')
-                            print(second_period)
                             break
                     if first_period_is_chosen and second_period_is_chosen:
-                        print('break2')
-                        print(second_period)
                         break
 
                 if not (first_period_is_chosen and second_period_is_chosen):
@@ -249,10 +243,15 @@ class SchoolTimetable:
                 else:
                     for pid in cur_prof_id_list:
                         op.change(profs, pid, weeks, first_period[0], first_period[1], [groups[i].course_id, cur_class_id_list])
+                        op.change(profs, pid, weeks, first_period[0] + 1, first_period[1], [groups[i].course_id, cur_class_id_list])
                         op.change(profs, pid, weeks, second_period[0], second_period[1], [groups[i].course_id, cur_class_id_list])
+                        op.change(profs, pid, weeks, second_period[0] + 1, second_period[1], [groups[i].course_id, cur_class_id_list])
+
                     for cid in cur_class_id_list:
                         oc.change(class_list, cid, weeks, first_period[0], first_period[1], [groups[i].course_id, cur_prof_id_list])
+                        oc.change(class_list, cid, weeks, first_period[0] + 1, first_period[1], [groups[i].course_id, cur_prof_id_list])
                         oc.change(class_list, cid, weeks, second_period[0], second_period[1], [groups[i].course_id, cur_prof_id_list])
+                        oc.change(class_list, cid, weeks, second_period[0] + 1, second_period[1], [groups[i].course_id, cur_prof_id_list])
 
         else:
             og.show_error_message('Bad arranging rule parameter: mode ' + str(settings.arranging_rule) + ' not define')
