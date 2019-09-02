@@ -53,7 +53,7 @@ def show_root_page(profs, courses, class_list, break_time, settings):
 
         def create_empty_school_timetable(title):
             school_timetable[0] = st.SchoolTimetable(title)
-            label['text'] = 'School timetable initialized'
+            label['text'] = l.st_initialized[settings.language]
             st_widget.destroy()
 
         st_widget.title('Create School Timetable')
@@ -80,13 +80,13 @@ def show_root_page(profs, courses, class_list, break_time, settings):
     button1.focus_force()
     label = tk.Label(root, text=l.st_not_initialized[settings.language])
     label.pack()
-    button2 = tk.Button(root, text=l.prof_info[settings.language], command=lambda: show_prof_page(profs))
+    button2 = tk.Button(root, text=l.prof_info[settings.language], command=lambda: show_prof_page(profs, settings))
     button2.pack()
-    button3 = tk.Button(root, text=l.course_info[settings.language], command=lambda: show_course_page(courses, profs, class_list))
+    button3 = tk.Button(root, text=l.course_info[settings.language], command=lambda: show_course_page(courses, profs, class_list, settings))
     button3.pack()
     button4 = tk.Button(root, text=l.class_info[settings.language], command=lambda: show_class_page(class_list))
     button4.pack()
-    button5 = tk.Button(root, text=l.set_break_time[settings.language], command=lambda: show_breaktime_page(break_time))
+    button5 = tk.Button(root, text=l.set_break_time[settings.language], command=lambda: show_breaktime_page(break_time, settings))
     button5.pack()
     button6 = tk.Button(root, text=l.settings[settings.language])
     button6.pack()
@@ -94,7 +94,7 @@ def show_root_page(profs, courses, class_list, break_time, settings):
     button7.pack()
     button8 = tk.Button(root, text=l.generate_timetable[settings.language], command=check_and_build_school_timetable)
     button8.pack()
-    button9 = tk.Button(root, text=l.check_schedule[settings.language], command=lambda: show_schedules_page(profs, courses, class_list, school_timetable[0]))
+    button9 = tk.Button(root, text=l.check_schedule[settings.language], command=lambda: show_schedules_page(profs, courses, class_list, school_timetable[0], settings.language))
     button9.pack()
     buttons_and_label = [button1, button2, button3, button4, button5, button6, button7, button8, button9, label]
     button6['command'] = lambda: show_settings_page(settings, buttons_and_label)
@@ -105,33 +105,17 @@ def show_checking_page():
     pass
 
 
-def show_prof_page(profs):
+def show_prof_page(profs, settings):
     def find_prof_widget():
         fp = tk.Toplevel()
         fp.grab_set()
         fp.focus_force()
-        fp.title("Find A Professor")
-        tk.Label(fp, text="Enter the professor's name").pack()
+        fp.title(l.find_a_prof[settings.language])
+        tk.Label(fp, text=l.enter_name[settings.language]).pack()
         e = tk.Entry(fp)
         e.pack()
-        tk.Button(fp, text='OK', command=lambda: show_prof_info(op.find_prof(profs, e.get()), fp)).pack(side='left')
-        tk.Button(fp, text='Cancel', command=fp.destroy).pack()
-
-    def add_prof_widget():
-        ap = tk.Toplevel()
-        ap.focus_force()
-        ap.grab_set()
-        ap.title("Add A Professor")
-        tk.Label(ap, text="Not implemented").pack()
-        tk.Button(ap, text='Cancel', command=ap.destroy).pack()
-
-    def delete_prof_widget():
-        dp = tk.Toplevel()
-        dp.focus_force()
-        dp.grab_set()
-        dp.title("Delete A Professor")
-        tk.Label(dp, text="Not implemented").pack()
-        tk.Button(dp, text='Cancel', command=dp.destroy).pack()
+        tk.Button(fp, text='OK', command=lambda: show_prof_info(op.find_prof(profs, e.get()), fp, language=settings.language)).pack(side='left')
+        tk.Button(fp, text=l.cancel[settings.language], command=fp.destroy).pack()
 
     def clear_all_preference():
         for i in profs.keys():
@@ -140,7 +124,7 @@ def show_prof_page(profs):
 
     prof_page = tk.Toplevel()
     prof_page.grab_set()
-    prof_page.title("Prof Information")
+    prof_page.title()
 
     canvas = tk.Canvas(prof_page)
     scroll = tk.Scrollbar(prof_page, orient='vertical', command=canvas.yview)
@@ -148,53 +132,49 @@ def show_prof_page(profs):
     for pid in profs.keys():
         label = tk.Label(canvas, text=profs[pid])
         canvas.create_window(0, i * 30, anchor='nw', window=label, height=30)
-        button = tk.Button(canvas, text='Details..', command=lambda a=pid: show_prof_info(profs[a]))
+        button = tk.Button(canvas, text=l.details[settings.language], command=lambda a=pid: show_prof_info(profs[a], language=settings.language))
         canvas.create_window(300, i * 30, anchor='nw', window=button, height=30)
         i += 1
 
-    button1 = tk.Button(prof_page, text="Find Prof", command=find_prof_widget)
+    button1 = tk.Button(prof_page, text=l.find_a_prof[settings.language], command=find_prof_widget)
     button1.pack(s='top')
-    button2 = tk.Button(prof_page, text="Add Prof", command=add_prof_widget)
-    button2.pack(s='top')
-    button3 = tk.Button(prof_page, text="Delete Prof", command=delete_prof_widget)
-    button3.pack(s='top')
-    button4 = tk.Button(prof_page, text='Clear All Preference', command=clear_all_preference)
+    button4 = tk.Button(prof_page, text=l.clear_all_preference[settings.language], command=clear_all_preference)
     button4.pack(s='top')
     canvas.configure(scrollregion=canvas.bbox('all'), yscrollcommand=scroll.set)
     canvas.pack(fill='both', expand=True, side='left')
     scroll.pack(fill='y', side='right')
 
 
-def show_course_page(courses, profs, class_list, values=[]):
+def show_course_page(courses, profs, class_list, settings, values=[]):
     def find_course_by_title_widget():
         fc = tk.Toplevel()
         fc.grab_set()
         fc.focus_force()
-        fc.title("Find A Course")
-        tk.Label(fc, text="Enter the course's title").pack()
+        fc.title(l.find_course[settings.language])
+        tk.Label(fc, text=l.enter_title[settings.language]).pack()
         e = tk.Entry(fc)
-        e.insert(tk.END, 'intro to comp sci')
+        e.insert(tk.END, 'intro to comp sci')  # Set default value
         e.pack()
-        tk.Button(fc, text='OK', command=lambda: show_course_info(oc.find_course_by_title(courses, e.get()), profs, class_list, fc)).pack(side='left')
-        tk.Button(fc, text='Cancel', command=fc.destroy).pack()
+        tk.Button(fc, text='OK', command=lambda: show_course_info(oc.find_course_by_title(courses, e.get()), profs, class_list, fc, language=settings.language)).pack(side='left')
+        tk.Button(fc, text=l.cancel[settings.language], command=fc.destroy).pack()
 
     def find_course_by_id_widget():
         fc = tk.Toplevel()
         fc.focus_force()
         fc.grab_set()
-        fc.title("Find A Course")
-        tk.Label(fc, text="Enter the course ID").pack()
+        fc.title(l.find_course[settings.language])
+        tk.Label(fc, text=l.enter_id[settings.language]).pack()
         e = tk.Entry(fc)
         e.insert(tk.END, '1')
         e.pack()
         tk.Button(fc, text='OK',
-                  command=lambda: show_course_info(oc.find_course_by_course_id(courses, e.get()), profs, class_list, fc)).pack(side='left')
-        tk.Button(fc, text='Cancel', command=fc.destroy).pack()
+                  command=lambda: show_course_info(oc.find_course_by_course_id(courses, e.get()), profs, class_list, fc, language=settings.language)).pack(side='left')
+        tk.Button(fc, text=l.cancel[settings.language], command=fc.destroy).pack()
 
     course_page = tk.Toplevel()
     course_page.focus_force()
     course_page.grab_set()
-    course_page.title("Course Information")
+    course_page.title(l.course_info[settings.language])
     v1 = tk.Variable()
     v2 = tk.Variable()
     v3 = tk.Variable()
@@ -214,24 +194,24 @@ def show_course_page(courses, profs, class_list, values=[]):
 
     row5 = [tk.Label(course_page) for _ in range(4)]
     for i in range(len(row5)):
-        row5[i]['text'] = c.COURSE_GENERAL_INFO[i]
+        row5[i]['text'] = c.COURSE_GENERAL_INFO[settings.language][i]
         row5[i].grid(row=5, column=i)
 
-    tk.Label(course_page, text='Filters:').grid(row=0, column=0)
+    tk.Label(course_page, text=l.filters[settings.language]).grid(row=0, column=0)
 
     def refresh_with_values():
         new_values = [v1.get(), v2.get(), v3.get(), v4.get()]
         course_page.destroy()
-        show_course_page(courses, profs, class_list, new_values)
+        show_course_page(courses, profs, class_list, settings, new_values)
 
-    tk.Button(course_page, text='Refresh', command=refresh_with_values).grid(row=1, column=2)
-    tk.Checkbutton(course_page, variable=v1, text='Scheduled manually', command=refresh_with_values).grid(row=1, column=1)
-    tk.Checkbutton(course_page, variable=v2, text='Scheduled automatically', command=refresh_with_values).grid(row=2, column=1)
-    tk.Checkbutton(course_page, variable=v3, text='Should be scheduled', command=refresh_with_values).grid(row=3, column=1)
-    tk.Checkbutton(course_page, variable=v4, text='Should not be scheduled', command=refresh_with_values).grid(row=4, column=1)
-    button1 = tk.Button(course_page, text="Find Course by Title", command=find_course_by_title_widget)
+    tk.Button(course_page, text=l.refresh[settings.language], command=refresh_with_values).grid(row=1, column=2)
+    tk.Checkbutton(course_page, variable=v1, text=l.sche_man[settings.language], command=refresh_with_values).grid(row=1, column=1)
+    tk.Checkbutton(course_page, variable=v2, text=l.sche_auto[settings.language], command=refresh_with_values).grid(row=2, column=1)
+    tk.Checkbutton(course_page, variable=v3, text=l.should_sche[settings.language], command=refresh_with_values).grid(row=3, column=1)
+    tk.Checkbutton(course_page, variable=v4, text=l.should_not_sche[settings.language], command=refresh_with_values).grid(row=4, column=1)
+    button1 = tk.Button(course_page, text=l.find_course_by_title[settings.language], command=find_course_by_title_widget)
     button1.grid(row=1, column=4)
-    button2 = tk.Button(course_page, text="Find Course by Course ID", command=find_course_by_id_widget)
+    button2 = tk.Button(course_page, text=l.find_course_by_id[settings.language], command=find_course_by_id_widget)
     button2.grid(row=2, column=4)
 
     def update_courses_shown():
@@ -247,22 +227,22 @@ def show_course_page(courses, profs, class_list, values=[]):
                 courses_to_be_shown.append(courses[ck])
         n = len(courses_to_be_shown)
         for i in range(n):
-            oc.display_course(course_page, courses_to_be_shown[i], i, profs, class_list)
+            oc.display_course(course_page, courses_to_be_shown[i], i, profs, class_list, settings)
 
     update_courses_shown()
 
 
 def show_class_page(classes):
     class_page = tk.Toplevel()
-    class_page.title("Class Information")
+    class_page.title("0")
     class_page.grab_set()
     class_page.focus_force()
     for i in classes.keys():
         tk.Label(class_page, text=classes[i].classId).pack()
 
 
-def show_breaktime_page(breaktime):
-    breaktime.show('Breaktime')
+def show_breaktime_page(breaktime, settings):
+    breaktime.show(l.breaktime[settings.language], language=settings.language)
 
 
 def show_settings_page(settings, buttons):
@@ -292,25 +272,25 @@ def show_settings_page(settings, buttons):
     variable_language.set(settings.language)
     variable_rule.set(settings.arranging_rule)
 
-    tk.Label(settings_page, text='Language:').pack(anchor='w')
+    tk.Label(settings_page, text='Language（语言）:').pack(anchor='w')
     tk.Radiobutton(settings_page, text="English", variable=variable_language, value=0).pack(anchor='w')
     tk.Radiobutton(settings_page, text="中文", variable=variable_language, value=1).pack(anchor='w')
 
-    tk.Label(settings_page, text='Arranging Rule:').pack(anchor='w')
+    tk.Label(settings_page, text='Arranging Rule（排课规则）:').pack(anchor='w')
     tk.Radiobutton(settings_page, text="Vacancy priority", variable=variable_rule, value=0).pack(anchor='w')
-    tk.Radiobutton(settings_page, text="Compactness priority", variable=variable_rule, value=1).pack(anchor='w')
+    tk.Radiobutton(settings_page, text="Compactness priority（紧凑型）", variable=variable_rule, value=1).pack(anchor='w')
 
-    button_save = tk.Button(settings_page, text='Save & Quit', command=save_and_quit)
+    button_save = tk.Button(settings_page, text='Save & Quit（保存并退出）', command=save_and_quit)
     button_save.pack()
 
 
-def show_prof_info(prof, prev_page=None):
+def show_prof_info(prof, prev_page=None, language=0):
     def update_label():
         column2[0]['text'] = str(prof.prof_id)
         column2[1]['text'] = str(prof.name)
         column2[2]['text'] = str(prof.telephone)
-        column2[3]['text'] = str(prof.time_preferred)
-        column2[4]['text'] = str(prof.time_not_possible)
+        column2[3]['text'] = prof.time_preferred.__str__(language)
+        column2[4]['text'] = prof.time_not_possible.__str__(language)
 
     def clear_time_preference():
         prof.clear_time_preference()
@@ -323,26 +303,26 @@ def show_prof_info(prof, prev_page=None):
         # p.destroy()
 
     def change_impossible_time():
-        prof.time_not_possible.show(prof.name + "'s Impossible Time", prof)
+        prof.time_not_possible.show(prof.name + l.impossible_time[language], prof, language=language)
         p.destroy()
 
     p = tk.Toplevel()
     p.grab_set()
     p.focus_force()
-    p.title("Professor Information")
+    p.title(l.prof_info[language])
     if not prof:
-        tk.Label(p, text='Professor not found').pack()
+        tk.Label(p, text=l.prof_not_found[language]).pack()
         tk.Button(p, text='OK', command=p.destroy).pack()
         return
 
     column1 = [tk.Label(p) for _ in range(5)]
     column2 = [tk.Label(p) for _ in range(5)]
 
-    column1[0]['text'] = 'ID'
-    column1[1]['text'] = 'Name'
-    column1[2]['text'] = 'Contact'
-    column1[3]['text'] = 'Periods preferred'
-    column1[4]['text'] = 'Periods not possible'
+    column1[0]['text'] = l.ID[language]
+    column1[1]['text'] = l.name[language]
+    column1[2]['text'] = l.contact[language]
+    column1[3]['text'] = l.periods_preferred[language]
+    column1[4]['text'] = l.periods_impossible[language]
 
     update_label()
 
@@ -353,12 +333,12 @@ def show_prof_info(prof, prev_page=None):
     if prev_page:
         prev_page.destroy()
 
-    tk.Button(p, text="Clear Time Preference", command=clear_time_preference).grid(s='s')
-    tk.Button(p, text="Change Time Preferred", command=change_preferred_time).grid(s='s')
-    tk.Button(p, text="Change Time Not Possible", command=change_impossible_time).grid(s='s')
+    tk.Button(p, text=l.clear_time_preference[language], command=clear_time_preference).grid(s='s')
+    # tk.Button(p, text="Change Time Preferred", command=change_preferred_time).grid(s='s')
+    tk.Button(p, text=l.change_time_impossible[language], command=change_impossible_time).grid(s='s')
 
 
-def show_course_info(course, profs, class_list, prev_page=None):
+def show_course_info(course, profs, class_list, prev_page=None, language=0):
     def update_label():
         def groups_str(groups):
             s = ''
@@ -375,14 +355,14 @@ def show_course_info(course, profs, class_list, prev_page=None):
         status = ''
         classes = ''
         if course.should_be_scheduled:
-            status += 'Should be scheduled in the school timetable\n'
+            status += l.should_sche[language] + '\n'
         else:
-            status += 'Should NOT be scheduled in the school timetable\n'
+            status += l.should_not_sche[language] + '\n'
 
         if course.scheduled_manually:
-            status += 'Scheduled manually'
+            status += l.sche_man[language]
         else:
-            status += 'To be scheduled by the program'
+            status += l.sche_auto[language]
         for prof in course.taught_by_profs:
             profs_names += ' ' + profs[prof].name
         for class_id in course.class_list:
@@ -406,21 +386,21 @@ def show_course_info(course, profs, class_list, prev_page=None):
     c = tk.Toplevel()
     c.grab_set()
     c.focus_force()
-    c.title("Course Information")
+    c.title(l.course_info[language])
     if not course:
-        tk.Label(c, text='Course not found').pack()
+        tk.Label(c, text=l.course_not_found[language]).pack()
         tk.Button(c, text='OK', command=c.destroy).pack()
         return
 
     column1 = [tk.Label(c) for _ in range(6)]
     column2 = [tk.Label(c) for _ in range(6)]
 
-    column1[0]['text'] = 'ID'
-    column1[1]['text'] = 'Title'
-    column1[2]['text'] = 'Course type'
-    column1[3]['text'] = 'Weeks'
-    column1[4]['text'] = 'Status'
-    column1[5]['text'] = 'Groups'
+    column1[0]['text'] = l.id_course[language]
+    column1[1]['text'] = l.title[language]
+    column1[2]['text'] = l.course_type[language]
+    column1[3]['text'] = l.weeks[language]
+    column1[4]['text'] = l.status[language]
+    column1[5]['text'] = l.group[language]
 
     for i in range(6):
         column1[i].grid(row=i, column=0)
@@ -478,29 +458,32 @@ def show_course_info(course, profs, class_list, prev_page=None):
                 b.grid(row=r, column=c)
                 var_array.append(v)
 
-        tk.Button(sw, text='Save & Quit', command=save_checkbuttons).grid(s='s')
+        tk.Button(sw, text=l.save_and_quit[language], command=save_checkbuttons).grid(s='s')
 
-    tk.Button(c, text="Schedule Manually", command=set_scheduled_manually).grid(s='s')
-    tk.Button(c, text="Schedule For Me", command=set_not_scheduled_manually).grid(s='s')
-    tk.Button(c, text="Schedule This Course", command=set_should_be_scheduled).grid(s='s')
-    tk.Button(c, text="Don't Schedule This Course", command=set_should_not_be_scheduled).grid(s='s')
-    tk.Button(c, text="Set Required Period", command=set_required_period).grid(s='s')
-    tk.Button(c, text="Set Weeks", command=set_weeks).grid(s='s')
-    tk.Button(c, text="Manage Grouping", command=lambda: show_grouping_page(course, profs, class_list, c)).grid(s='s')
+    tk.Button(c, text=l.sche_man[language], command=set_scheduled_manually).grid(s='s')
+    tk.Button(c, text=l.sche_auto[language], command=set_not_scheduled_manually).grid(s='s')
+    tk.Button(c, text=l.should_sche[language], command=set_should_be_scheduled).grid(s='s')
+    tk.Button(c, text=l.should_not_sche[language], command=set_should_not_be_scheduled).grid(s='s')
+    tk.Button(c, text=l.set_required_period[language], command=set_required_period).grid(s='s')
+    tk.Button(c, text=l.set_weeks[language], command=set_weeks).grid(s='s')
+    tk.Button(c, text=l.manage_grouping[language], command=lambda: show_grouping_page(course, profs, class_list, c, language)).grid(s='s')
 
 
-def show_grouping_page(course, profs, class_list, parent_course_info):
+def show_grouping_page(course, profs, class_list, parent_course_info, language=0):
     gp = tk.Toplevel()
     gp.focus_force()
     gp.grab_set()
 
     def refresh():
         gp.destroy()
-        show_grouping_page(course, profs, class_list, parent_course_info)
+        show_grouping_page(course, profs, class_list, parent_course_info, language)
 
     def update_labels():
         for i in range(len(course.groups)):
-            labels[i][0]['text'] = str(*course.groups[i][0])
+            s = ''
+            for class_id in course.groups[i][0]:
+                s += class_id + ' '
+            labels[i][0]['text'] = s
             labels[i][1]['text'] = op.list_prof_ids_to_names(profs, course.groups[i][1])
 
     def save_and_quit():
@@ -508,41 +491,41 @@ def show_grouping_page(course, profs, class_list, parent_course_info):
         for i in course.groups:
             for j in i:
                 if not j:
-                    show_error_message('Group cannot be empty!')
+                    show_error_message(l.group_empty[language])
                     return
         gp.destroy()
         parent_course_info.destroy()
-        show_course_info(course, profs, class_list)
+        show_course_info(course, profs, class_list, language=language)
 
     def rebind_classes(group):
         group[0] = []
         update_labels()
         rc = tk.Toplevel()
-        rc.title('Rebind Classes')
+        rc.title(l.rebind_classes[language])
         rc.grab_set()
         rc.focus_force()
-        label1 = tk.Label(rc, text='Major').pack()
+        label1 = tk.Label(rc, text=l.major[language]).pack()
         entry1 = tk.Entry(rc)
         entry1.pack()
 
-        label2 = tk.Label(rc, text='Grade').pack()
+        label2 = tk.Label(rc, text=l.grade[language]).pack()
         entry2 = tk.Entry(rc)
         entry2.pack()
 
-        label3 = tk.Label(rc, text='Index').pack()
+        label3 = tk.Label(rc, text=l.index[language]).pack()
         entry3 = tk.Entry(rc)
         entry3.pack()
 
         def find_class():
             class_id = str(entry1.get()) + str(entry2.get()) + str(entry3.get())
             if class_id not in class_list:
-                show_error_message('Class not found!')
+                show_error_message(l.class_not_found[language])
             else:
                 course.add_class_to_group(group, class_list[class_id])
                 update_labels()
 
-        button1 = tk.Button(rc, text='Add Class', command=find_class).pack()
-        button2 = tk.Button(rc, text='Finish', command=rc.destroy).pack()
+        button1 = tk.Button(rc, text=l.add_class[language], command=find_class).pack()
+        button2 = tk.Button(rc, text=l.finish[language], command=rc.destroy).pack()
 
     def rebind_profs(group):
         group[1] = []
@@ -551,14 +534,14 @@ def show_grouping_page(course, profs, class_list, parent_course_info):
         def find_prof_by_name():
             p = op.find_prof(profs, entry1.get())
             if not p:
-                show_error_message('Prof not found!')
+                show_error_message(l.prof_not_found[language])
             else:
                 course.add_prof_to_group(group, p)
                 update_labels()
 
         def find_prof_by_id():
             if str(entry2.get()) not in profs:
-                show_error_message('Prof not found!')
+                show_error_message(l.prof_not_found[language])
             else:
                 course.add_prof_to_group(group, profs[str(entry2.get())])
                 update_labels()
@@ -568,15 +551,15 @@ def show_grouping_page(course, profs, class_list, parent_course_info):
         rp.title('Rebind Profs')
         rp.grab_set()
         rp.focus_force()
-        label1 = tk.Label(rp, text='Name').pack()
+        label1 = tk.Label(rp, text=l.name[language]).pack()
         entry1 = tk.Entry(rp)
         entry1.pack()
-        button1 = tk.Button(rp, text='Add By Name', command=find_prof_by_name).pack()
-        label2 = tk.Label(rp, text='Prof ID').pack()
+        button1 = tk.Button(rp, text=l.add_by_name[language], command=find_prof_by_name).pack()
+        label2 = tk.Label(rp, text=l.ID[language]).pack()
         entry2 = tk.Entry(rp)
         entry2.pack()
-        button2 = tk.Button(rp, text='Add By ID', command=find_prof_by_id).pack()
-        button3 = tk.Button(rp, text='Finish', command=rp.destroy).pack()
+        button2 = tk.Button(rp, text=l.add_by_id[language], command=find_prof_by_id).pack()
+        button3 = tk.Button(rp, text=l.finish[language], command=rp.destroy).pack()
 
     def add_group():
         course.add_group()
@@ -586,8 +569,8 @@ def show_grouping_page(course, profs, class_list, parent_course_info):
         course.remove_group(group)
         refresh()
 
-    tk.Label(gp, text='Profs').grid(row=0, column=1)
-    tk.Label(gp, text='Classes').grid(row=0, column=0)
+    tk.Label(gp, text=l.prof[language]).grid(row=0, column=1)
+    tk.Label(gp, text=l.classes[language]).grid(row=0, column=0)
     labels = []
     for i in range(len(course.groups)):
         labels.append([])
@@ -595,80 +578,71 @@ def show_grouping_page(course, profs, class_list, parent_course_info):
         labels[-1][0].grid(row=i + 1, column=0)
         labels[-1].append(tk.Label(gp, text=op.list_prof_ids_to_names(profs, course.groups[i][1])))
         labels[-1][1].grid(row=i + 1, column=1)
-        tk.Button(gp, text="Rebind Classes", command=lambda g=course.groups[i]: rebind_classes(g)).grid(row=i + 1, column=2)
-        tk.Button(gp, text="Rebind Profs", command=lambda g=course.groups[i]: rebind_profs(g)).grid(row=i + 1, column=3)
-        tk.Button(gp, text="Delete", command=lambda g=course.groups[i]: remove_group(g)).grid(row=i + 1, column=4)
+        tk.Button(gp, text=l.rebind_classes[language], command=lambda g=course.groups[i]: rebind_classes(g)).grid(row=i + 1, column=2)
+        tk.Button(gp, text=l.rebind_profs[language], command=lambda g=course.groups[i]: rebind_profs(g)).grid(row=i + 1, column=3)
+        tk.Button(gp, text=l.delete[language], command=lambda g=course.groups[i]: remove_group(g)).grid(row=i + 1, column=4)
 
-    tk.Button(gp, text='Add Group', command=add_group).grid(s='s')
-    tk.Button(gp, text='Save & Quit', command=save_and_quit).grid(s='s')
+    tk.Button(gp, text=l.add_group[language], command=add_group).grid(s='s')
+    tk.Button(gp, text=l.save_and_quit[language], command=save_and_quit).grid(s='s')
 
 
-def show_course_page_temp(profs, class_list, school_timetable):
+def show_schedules_page(profs, courses, class_list, school_timetable, language=0):
     if not school_timetable:
-        show_error_message('School timetable not initiated yet')
-        return
-    cp = tk.Toplevel()
-    cp.focus_force()
-    cp.grab_set()
-
-
-def show_schedules_page(profs, courses, class_list, school_timetable):
-    if not school_timetable:
-        show_error_message('School Timetable not set yet')
+        show_error_message(l.st_not_initialized[language])
         return
     if not school_timetable.is_generated:
-        show_error_message('School Timetable not generated yet')
+        show_error_message(l.st_not_generated[language])
         return
     sp = tk.Toplevel()
     sp.grab_set()
     sp.focus_force()
-    tk.Button(sp, text='Prof Schedules', command=lambda: show_prof_schedule_widget(profs, courses)).pack()
-    tk.Button(sp, text='Class Schedules').pack()
-    tk.Button(sp, text='School Timetable', command=lambda: show_error_message('Not implemented')).pack()
+    tk.Button(sp, text=l.prof_sche[language], command=lambda: show_prof_schedule_widget(profs, courses, language)).pack()
+    tk.Button(sp, text=l.class_sche[language]).pack()
+    tk.Button(sp, text=l.school_sche[language], command=lambda: show_error_message('Not implemented')).pack()
 
 
-def show_prof_schedule_widget(profs, courses):
+def show_prof_schedule_widget(profs, courses, language=0):
     def find_prof():
         p = op.find_prof(profs, e.get())
         if not p:
-            show_error_message('Prof not found')
+            show_error_message(l.prof_not_found[language])
             return
         else:
             psp.destroy()
-            show_prof_schedule(profs, p, courses)
+            show_prof_schedule(profs, p, courses, language)
 
     psp = tk.Toplevel()
     psp.grab_set()
     psp.focus_force()
-    tk.Label(psp, text="Enter the professor's name").grid(row=0, column=0)
+    tk.Label(psp, text=l.enter_name[language]).grid(row=0, column=0)
     e = tk.Entry(psp)
     e.grid(row=1, column=0)
-    tk.Button(psp, text='Search', command=find_prof).grid(row=2, column=0)
+    tk.Button(psp, text=l.search[language], command=find_prof).grid(row=2, column=0)
 
 
-def show_prof_schedule(profs, p, courses):
+def show_prof_schedule(profs, p, courses, language=0):
     def update_info(prof, week, labels=[]):
         if not prof:
-            show_error_message('Prof not found')
+            show_error_message(l.prof_not_found[language])
             return
         elif week < 0 or week > 29:
-            show_error_message('Week does not exist')
+            show_error_message(l.week_not_existed[language])
         else:
             forget_labels(labels)
             week_entry = tk.Entry(psp)
             week_entry.grid(row=0, column=6)
-            l = tk.Label(psp, text=prof.name + "'s week " + str(week + 1))
-            l.grid(row=3, column=3)
-            labels = schedule_to_gui(courses, prof.schedule[week], psp, 4, 0)
-            labels.append(l)
-            tk.Button(psp, text='Jump to Week', command=lambda: update_info(prof, int(week_entry.get()) - 1, labels)).grid(row=0, column=7)
-            tk.Button(psp, text='Previous Week', command=lambda: update_info(prof, week - 1, labels)).grid(row=1, column=6)
-            tk.Button(psp, text='Next Week', command=lambda: update_info(prof, week + 1, labels)).grid(row=2, column=6)
+            label = tk.Label(psp, text=prof.name + l.of_week_part1[language] + str(week + 1) + l.of_week_part2[language])
+            label.grid(row=3, column=3)
+            labels = schedule_to_gui(courses, prof.schedule[week], psp, 4, 0, language)
+            labels.append(label)
+            tk.Button(psp, text=l.jump_to_week[language], command=lambda: update_info(prof, int(week_entry.get()) - 1, labels)).grid(row=0, column=7)
+            tk.Button(psp, text=l.prev_week[language], command=lambda: update_info(prof, week - 1, labels)).grid(row=1, column=6)
+            tk.Button(psp, text=l.next_week[language], command=lambda: update_info(prof, week + 1, labels)).grid(row=2, column=6)
 
     def find_prof():
         p = op.find_prof(profs, e.get())
         if not p:
-            show_error_message('Prof not found')
+            show_error_message(l.prof_not_found[language])
             return
         else:
             psp.destroy()
@@ -677,18 +651,18 @@ def show_prof_schedule(profs, p, courses):
     psp = tk.Toplevel()
     psp.grab_set()
     psp.focus_force()
-    tk.Label(psp, text="Enter the professor's name").grid(row=0, column=0)
+    tk.Label(psp, text=l.enter_name[language]).grid(row=0, column=0)
     e = tk.Entry(psp)
     e.grid(row=1, column=0)
-    tk.Button(psp, text='Search', command=find_prof).grid(row=2, column=0)
+    tk.Button(psp, text=l.search[language], command=find_prof).grid(row=2, column=0)
     update_info(p, 0, [])
 
 
-def schedule_to_gui(courses, timetable, page, row_start, col_start):
+def schedule_to_gui(courses, timetable, page, row_start, col_start, language=0):
     for i in range(row_start, row_start + 12):
-        tk.Label(page, text='Period ' + str(i - row_start + 1)).grid(row=i + 1, column=col_start)
+        tk.Label(page, text=l.period_part1 + str(i - row_start + 1) + l.period_part2).grid(row=i + 1, column=col_start)
     for i in range(col_start, col_start + 7):
-        tk.Label(page, text=c.WEEK[i - col_start]).grid(row=row_start, column=i + 1)
+        tk.Label(page, text=c.WEEK[language][i - col_start]).grid(row=row_start, column=i + 1)
     ttk.Separator(page, orient='horizontal').grid(column=0, row=row_start + 4, columnspan=7, sticky='ns')
     labels = []
     for i in range(12):
@@ -696,17 +670,17 @@ def schedule_to_gui(courses, timetable, page, row_start, col_start):
             cur = timetable.timetable[i][j]
             if cur != '0':
                 if isinstance(cur, str):
-                    l = tk.Label(page, text=cur)
-                    l.grid(row=row_start + i + 1, column=col_start + j + 1)
+                    label = tk.Label(page, text=cur)
+                    label.grid(row=row_start + i + 1, column=col_start + j + 1)
                 else:  # It's of form of [course_id,[classId]]
                     s = ''
                     s += courses[cur[0]].title
                     s += ', '
                     for cid in cur[1]:
                         s += cid + ' '
-                    l = tk.Label(page, text=s)
-                    l.grid(row=row_start + i + 1, column=col_start + j + 1)
-                labels.append(l)
+                    label = tk.Label(page, text=s)
+                    label.grid(row=row_start + i + 1, column=col_start + j + 1)
+                labels.append(label)
     return labels
 
 

@@ -2,6 +2,7 @@ import tkinter as tk
 
 import Constants as c
 import Prof
+import languages as l
 import operations_gui as og
 
 
@@ -16,7 +17,7 @@ class Timetable:
 
         return all(all_zeros_1d(a) for a in self.timetable)
 
-    def __str__(self):  # to be modified
+    def __str__(self, language=0):  # to be modified
         if self.all_zeros():
             return 'N/A'
 
@@ -24,10 +25,10 @@ class Timetable:
         for i in range(len(self.timetable)):
             for j in range(len(self.timetable[0])):
                 if self.timetable[i][j] == 1 or self.timetable[i][j] == '1':
-                    res += c.WEEK[j] + ' period ' + str(int(i) + 1) + ' '
+                    res += c.WEEK[language][j] + l.period_part1[language] + str(int(i) + 1) + l.period_part2[language] + ' '
         return res if res else str(self.timetable)
 
-    def show(self, page_name='.', parent=None):
+    def show(self, page_name='.', parent=None, language=0):
         timetable_page = tk.Toplevel()
         timetable_page.focus_force()
         timetable_page.grab_set()
@@ -43,10 +44,10 @@ class Timetable:
             timetable_page.destroy()
 
         for j in range(7):
-            b = tk.Label(timetable_page, text=c.WEEK[j])
+            b = tk.Label(timetable_page, text=c.WEEK[language][j])
             b.grid(row=0, column=j + 1)
         for i in range(12):
-            b = tk.Label(timetable_page, text='period' + str(i + 1))
+            b = tk.Label(timetable_page, text=l.period_part1[language] + str(i + 1) + l.period_part2[language])
             b.grid(row=i + 1, column=0)
 
         for i in range(12):
@@ -58,7 +59,7 @@ class Timetable:
                 b.grid(row=i + 1, column=j + 1)
                 var_array[i].append(v)
 
-        b = tk.Button(timetable_page, text='Save & Quit', command=save)
+        b = tk.Button(timetable_page, text=l.save_and_quit[language], command=save)
         b.grid()
         return timetable_page
 

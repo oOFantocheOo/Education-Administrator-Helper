@@ -2,6 +2,7 @@ import pickle
 import tkinter as tk
 
 import Course
+import languages as l
 import openpyxl as xl
 import operations_gui as og
 
@@ -44,7 +45,7 @@ def selected_courses_info(courses):
     return string
 
 
-def display_course(page, course, n, profs, class_list):  # In which page, display which course, and this is the nth course to display
+def display_course(page, course, n, profs, class_list, settings):  # In which page, display which course, and this is the nth course to display
     profs_names = ''
     classes = ''
     for prof in course.taught_by_profs:
@@ -53,7 +54,7 @@ def display_course(page, course, n, profs, class_list):  # In which page, displa
         classes += ' ' + class_a
 
     row = [tk.Label(page) for _ in range(4)]
-    row.append(tk.Button(page, text='Details..', command=lambda a=course: og.show_course_info(a, profs, class_list)))
+    row.append(tk.Button(page, text=l.details[settings.language], command=lambda a=course: og.show_course_info(a, profs, class_list, language=settings.language)))
     week_str = ''
     for i in range(len(course.weeks)):
         if course.weeks[i] == 1 or course.weeks[i] == '1':
@@ -100,9 +101,9 @@ def auto_classify(courses, language='Chinese'):
             cur = courses[i]
             cur.course_type = 'Course'
 
+
 def refresh_courses(courses):
     for cid in courses.keys():
-        cur=courses[cid]
-        courses[cid]=Course.Course(cid,cur.title)
+        cur = courses[cid]
+        courses[cid] = Course.Course(cid, cur.title)
     auto_classify(courses)
-

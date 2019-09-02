@@ -197,8 +197,59 @@ class SchoolTimetable:
                     second.append(groups[i])
                     groups.pop(i)
 
-        # to be implemented
-        print(second)
+        err = []
+        if settings.arranging_rule == 0:  # if set to priority to periods that are most empty
+            print('Allocating courses with priority to periods that are most empty in a week')
+        elif settings.arranging_rule == 1:  # if set to closely pack
+            print('Allocating courses: closely pack everything')
+            for i in range(len(second)):
+                cur_prof_id_list = second[i].prof_id_list
+                cur_class_id_list = second[i].class_id_list
+                weeks = courses[second[i].course_id].weeks
+                first_period_is_chosen, second_period_is_chosen = False, False
+
+                for date in range(7):
+                    for period in range(12):
+                        if not op.profs_are_available(profs, cur_prof_id_list, weeks, period, date):
+                            continue
+                        elif not oc.classes_are_available(class_list, cur_class_id_list, weeks, period, date):
+                            continue
+                        else:
+                            first_period_is_chosen = True
+                            first_period = (period, date)
+                            for d in range(date + 2, 7):
+                                for p in range(12):
+                                    if not op.profs_are_available(profs, cur_prof_id_list, weeks, p, d):
+                                        continue
+                                    elif not oc.classes_are_available(class_list, cur_class_id_list, weeks, p, d):
+                                        continue
+                                    else:
+                                        second_period_is_chosen = True
+                                        second_period = (p, d)
+                                        break
+                                if second_period_is_chosen:
+                                    break
+
+                        if first_period_is_chosen and second_period_is_chosen:
+                            break
+                    if first_period_is_chosen and second_period_is_chosen:
+                        break
+
+                if not (first_period_is_chosen and second_period_is_chosen):
+                    err.append(courses[second[i].course_id].title + 'cannot be arranged')
+                else:
+                    for pid in cur_prof_id_list:
+                        op.change(profs, pid, weeks, first_period[0], first_period[1], [second[i].course_id, cur_class_id_list])
+                        op.change(profs, pid, weeks, first_period[0] + 1, first_period[1], [second[i].course_id, cur_class_id_list])
+                        op.change(profs, pid, weeks, second_period[0], second_period[1], [second[i].course_id, cur_class_id_list])
+                        op.change(profs, pid, weeks, second_period[0] + 1, second_period[1], [second[i].course_id, cur_class_id_list])
+
+                    for cid in cur_class_id_list:
+                        oc.change(class_list, cid, weeks, first_period[0], first_period[1], [second[i].course_id, cur_prof_id_list])
+                        oc.change(class_list, cid, weeks, first_period[0] + 1, first_period[1], [second[i].course_id, cur_prof_id_list])
+                        oc.change(class_list, cid, weeks, second_period[0], second_period[1], [second[i].course_id, cur_prof_id_list])
+                        oc.change(class_list, cid, weeks, second_period[0] + 1, second_period[1], [second[i].course_id, cur_prof_id_list])
+
         # iii)Allocate the remaining courses according to rules
         err = []
         if settings.arranging_rule == 0:  # if set to priority to periods that are most empty
