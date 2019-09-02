@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ab634377-4e7c-490d-9c2e-94d9370fd5b8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Constants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/SchoolTimetable.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/SchoolTimetable.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Timetable.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Timetable.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/breaktime_file" beforeDir="false" afterPath="$PROJECT_DIR$/venv/breaktime_file" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/classes_file" beforeDir="false" afterPath="$PROJECT_DIR$/venv/classes_file" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/courses_file" beforeDir="false" afterPath="$PROJECT_DIR$/venv/courses_file" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/languages.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/languages.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/operations_course.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/operations_course.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/operations_gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/operations_gui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/profs_file" beforeDir="false" afterPath="$PROJECT_DIR$/venv/profs_file" afterDir="false" />
-    </list>
+    <list default="true" id="ab634377-4e7c-490d-9c2e-94d9370fd5b8" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,8 +106,9 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/venv/operations_gui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="439" lean-forward="true" selection-start-line="439" selection-end-line="439" />
+            <state relative-caret-position="238">
+              <caret line="498" lean-forward="true" selection-start-line="498" selection-end-line="498" />
+              <caret line="424" lean-forward="true" selection-start-line="424" selection-end-line="424" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
                 <element signature="e#258#499#0" />
@@ -585,7 +574,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566798951525</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Update part of the language">
+      <created>1567441103794</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1567441103794</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TodoView">
@@ -794,8 +790,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/venv/operations_gui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="439" lean-forward="true" selection-start-line="439" selection-end-line="439" />
+        <state relative-caret-position="238">
+          <caret line="498" lean-forward="true" selection-start-line="498" selection-end-line="498" />
+          <caret line="424" lean-forward="true" selection-start-line="424" selection-end-line="424" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
             <element signature="e#258#499#0" />
